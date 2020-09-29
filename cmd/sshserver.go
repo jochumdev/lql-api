@@ -31,6 +31,7 @@ func init() {
 	sshServerCmd.Flags().StringP("ssh-user", "U", "root", "SSH User")
 	sshServerCmd.Flags().StringP("ssh-keyfile", "k", "~/.ssh/id_rsa", "Keyfile")
 	sshServerCmd.Flags().StringP("ssh-password", "p", "", "Password")
+	sshServerCmd.Flags().StringP("listen", "l", ":8080", "Address to listen on")
 	rootCmd.AddCommand(sshServerCmd)
 }
 
@@ -45,11 +46,7 @@ If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 	`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		sReplacer := strings.NewReplacer("{site}", args[0])
-		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
-		localSocket := path.Join(os.TempDir(), "lql-client.sock")
-		var tunnel *myssh.Tunnel
-		var lqlClient *lql.Client
+
 		logger := log.New()
 		logger.SetOutput(os.Stderr)
 		if !cmd.Flag("debug").Changed {
@@ -57,6 +54,18 @@ If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 		} else {
 			logger.SetLevel(log.TraceLevel)
 		}
+
+		destSocket, err := cmd.Flags().GetString("socket")
+		if err != nil {
+			logger.WithField("error", err).Error()
+			return
+		}
+		sReplacer := strings.NewReplacer("{site}", args[0])
+		destSocket = sReplacer.Replace(destSocket)
+
+		localSocket := path.Join(os.TempDir(), "lql-client.sock")
+		var tunnel *myssh.Tunnel
+		var lqlClient *lql.Client
 
 		logger.WithFields(log.Fields{"destSocket": destSocket, "localSocket": localSocket}).Debug("Sockets")
 
@@ -134,12 +143,13 @@ If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 		defer lqlClient.Close()
 		lqlClient.SetLogger(logger)
 
-		server, err := lql.NewServer(lqlClient, logger, "")
+		htpasswd := sReplacer.Replace(cmd.Flag("htpasswd").Value.String())
+		server, err := lql.NewServer(lqlClient, logger, htpasswd)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return
 		}
 
-		server.ListenAndServe(":8080")
+		server.ListenAndServe(cmd.Flag("listen").Value.String())
 	},
 }

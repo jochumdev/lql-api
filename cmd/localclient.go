@@ -33,7 +33,7 @@ var localClientCmd = &cobra.Command{
 	Short: "Local LQL Client",
 	Long: `Local LQL Client
 	
-Connects to the local socket`,
+Requires a local lql unix socket.`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])
