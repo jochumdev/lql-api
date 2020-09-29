@@ -35,9 +35,11 @@ func NewServer(client *Client, logger *log.Logger, htpasswdPath string) (*Server
 	// the API that will be served with
 	// the specification.
 	infos := &openapi.Info{
-		Title:       "LQL API",
-		Description: `This is the LQL API for your check_mk Server.`,
-		Version:     "unset",
+		Title: "LQL API",
+		Description: `This is the LQL API for your check_mk Server.
+
+All v1/ endpoints require http basic auth`,
+		Version: "unset",
 	}
 	// Create a new route that serve the OpenAPI spec.
 	fizz.GET("/openapi.json", nil, fizz.OpenAPI(infos, "json"))
@@ -48,6 +50,11 @@ func NewServer(client *Client, logger *log.Logger, htpasswdPath string) (*Server
 		htpasswd := auth.HtpasswdFileProvider(htpasswdPath)
 		authenticator := auth.NewBasicAuthenticator("LQL API", htpasswd)
 		v1Group.Use(basicAuthMiddleware(authenticator))
+	} else {
+		// Inject empty user if not .htpasswd have been given
+		v1Group.Use(func(c *gin.Context) {
+			c.Set("user", "")
+		})
 	}
 	v1Routes(v1Group)
 

@@ -30,6 +30,7 @@ func v1RawPost(c *gin.Context, params *V1RawRequestParams) ([]gin.H, error) {
 	if err != nil {
 		return nil, err
 	}
+	user := c.GetString("user")
 
 	// Param validation and request building
 	request := []string{}
@@ -63,5 +64,5 @@ func v1RawPost(c *gin.Context, params *V1RawRequestParams) ([]gin.H, error) {
 		return nil, fmt.Errorf("Unknown Method requested: '%s'", params.Method)
 	}
 
-	return client.Request(c, strings.Join(request, "\n"), "", params.Limit)
+	return client.Request(c, strings.Join(request, "\n"), user, params.Limit)
 }
