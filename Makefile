@@ -1,6 +1,6 @@
 # This how we want to name the binary output
-BINARY=lql_api
-
+BINARY := lql-api
+SHELL := /bin/bash
 
 TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=1)
 TAG := $(shell git describe --abbrev=0 --tags ${TAG_COMMIT} 2>/dev/null || true)
@@ -19,15 +19,24 @@ ifneq ($(shell git status --porcelain),)
 endif
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS=-ldflags "-w -s -X github.com/webmeisterei/lql_api/version.Version=${VERSION}"
+LDFLAGS=-ldflags '-w -s -X github.com/webmeisterei/lql_api/version.Version=${VERSION}'
+LDFLAGS_STATIC=-ldflags '-extldflags "-static" -w -s -X github.com/webmeisterei/lql_api/version.Version=${VERSION}'
+
+build:
+	go build -o ${BINARY} -a ${LDFLAGS}
+
 
 # Builds the project
-build:
-	go build ${LDFLAGS} -o ${BINARY}
+build_static:
+	CGO_ENABLED=0 GOOS=linux go build -o ${BINARY} -a ${LDFLAGS_STATIC}
 
 # Installs our project: copies binaries
 install:
-	go install ${LDFLAGS_f1}
+	go install ${LDFLAGS}
+
+.PHONY: debian
+debian:
+	GOPROXY= dpkg-buildpackage -us -uc
 
 # Cleans our project: deletes binaries
 clean:

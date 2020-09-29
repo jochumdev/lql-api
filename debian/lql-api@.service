@@ -3,10 +3,11 @@ Description=LQL API Server
 After=network.target
 
 [Service]
+EnvironmentFile=/etc/lql-api/%i
 Type=simple
 User=%i
 Group=%i
-ExecStart=/usr/local/bin/lql_api localserver %i --listen localhost:8080 -d
+ExecStart=/usr/bin/lql-api localserver %i --listen $LISTEN $DEBUG
 
 [Install]
 WantedBy=multi-user.target

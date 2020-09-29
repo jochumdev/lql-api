@@ -1,2 +1,8 @@
-lql_api
+_build
+lql-api
 .pc
+
+debian/debhelper-build-stamp
+debian/lql-api.debhelper.log
+debian/lql-api
+debian/.debhelper
