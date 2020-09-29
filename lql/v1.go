@@ -11,6 +11,11 @@ func v1Routes(grp *fizz.RouterGroup) {
 		fizz.Response("400", "Bad request", nil, nil),
 	}, tonic.Handler(v1RawPost, 200))
 
+	grp.GET("/ping", []fizz.OperationOption{
+		fizz.Summary("GET ping"),
+		fizz.Response("400", "Bad request", nil, nil),
+	}, tonic.Handler(v1Ping, 200))
+
 	grp.GET("/stats/tactical_overview", []fizz.OperationOption{
 		fizz.Summary("GET tactical overview data"),
 		fizz.Response("400", "Bad request", nil, nil),
