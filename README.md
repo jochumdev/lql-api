@@ -2,6 +2,8 @@
 
 LQL API Server for check_mk
 
+See [the LQL Docs](https://checkmk.com/cms_livestatus.html) for what LQL can do for you.
+
 ## Commands the client supports
 
 ### localclient - Local LQL Client
@@ -27,3 +29,7 @@ Prints the version
 ## OpenAPI 3.0 Support in sshserver
 
 This support's OpenAPI 3.0 use the url http://localhost:8080/openapi.json and browse it over an OpenAPI browser.
+
+## License
+
+MIT - Copyright 2020 by Webmeisterei GmbH
