@@ -12,13 +12,14 @@ require (
 	github.com/loopfz/gadgeto v0.10.1
 	github.com/mailru/easyjson v0.7.6 // indirect
 	github.com/micro/micro/v2 v2.9.3
+	github.com/micro/micro/v3 v3.0.0-beta.5
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/rgzr/sshtun v0.0.2
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.6.3
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.6.1
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.7

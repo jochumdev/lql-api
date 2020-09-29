@@ -2,22 +2,29 @@ package lql
 
 import (
 	"fmt"
+	"net/http"
 
+	auth "github.com/abbot/go-http-auth"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
+	ginlogrus "github.com/toorop/gin-logrus"
 
 	"github.com/wI2L/fizz"
 	"github.com/wI2L/fizz/openapi"
 )
 
 type Server struct {
-	client *Client
-	fizz   *fizz.Fizz
+	fizz         *fizz.Fizz
+	htpasswdPath string
 }
 
-func NewServer(client *Client) (*Server, error) {
+func NewServer(client *Client, logger *log.Logger, htpasswdPath string) (*Server, error) {
 	engine := gin.New()
 	engine.Use(cors.Default())
+	engine.Use(ginlogrus.Logger(logger), gin.Recovery(), clientInjectorMiddleware(client))
+
+	Logger = logger
 
 	fizz := fizz.NewFromEngine(engine)
 
@@ -36,10 +43,27 @@ func NewServer(client *Client) (*Server, error) {
 	fizz.GET("/openapi.json", nil, fizz.OpenAPI(infos, "json"))
 
 	// Setup routes.
+	v1Group := fizz.Group("/v1", "v1", "LQL API v1")
+	if htpasswdPath != "" {
+		htpasswd := auth.HtpasswdFileProvider(htpasswdPath)
+		authenticator := auth.NewBasicAuthenticator("LQL API", htpasswd)
+		v1Group.Use(basicAuthMiddleware(authenticator))
+	}
+	v1Routes(v1Group)
+
 	// routes(fizz.Group("/market", "market", "Your daily dose of freshness"))
 
 	if len(fizz.Errors()) != 0 {
 		return nil, fmt.Errorf("fizz errors: %v", fizz.Errors())
 	}
-	return &Server{client: client, fizz: fizz}, nil
+	return &Server{fizz: fizz, htpasswdPath: htpasswdPath}, nil
+}
+
+func (s *Server) ListenAndServe(address string) {
+	srv := &http.Server{
+		Addr:    address,
+		Handler: s.fizz,
+	}
+
+	srv.ListenAndServe()
 }

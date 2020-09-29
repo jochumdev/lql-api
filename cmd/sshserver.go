@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"net"
-	"net/http"
 	"os"
 	"os/signal"
 	"path"
@@ -11,25 +10,23 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	myssh "github.com/webmeisterei/lql_api/internal/ssh"
 	"github.com/webmeisterei/lql_api/lql"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	ginlogrus "github.com/toorop/gin-logrus"
-
-	// Docs for gin swagger
-	_ "github.com/webmeisterei/lql_api/docs"
-
 	log "github.com/sirupsen/logrus"
 )
 
 func init() {
+	sshServerMinConns := 0
+	sshServerMaxConns := 0
+	sshServerCmd.Flags().IntVarP(&sshServerMinConns, "min-conns", "m", 2, "minimal Client Connections")
+	sshServerCmd.Flags().IntVarP(&sshServerMaxConns, "max-conns", "x", 5, "maximal Client Connections")
+
 	sshServerCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket on the Server")
+	sshServerCmd.Flags().StringP("htpasswd", "h", "", "htpasswd file, default: NO authentication")
 	sshServerCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	sshServerCmd.Flags().StringP("ssh-user", "U", "root", "SSH User")
 	sshServerCmd.Flags().StringP("ssh-keyfile", "k", "~/.ssh/id_rsa", "Keyfile")
@@ -118,7 +115,18 @@ If you don't provide ssh-keyfile and ssh-password I will use your local agent.
 		defer tunnel.Close()
 		time.Sleep(500 * time.Millisecond)
 
-		lqlClient, err := lql.NewClient(1, 1, "unix", localSocket)
+		minConns, err := cmd.Flags().GetInt("min-conns")
+		if err != nil {
+			logger.WithField("error", err).Error()
+			return
+		}
+		maxConns, err := cmd.Flags().GetInt("max-conns")
+		if err != nil {
+			logger.WithField("error", err).Error()
+			return
+		}
+
+		lqlClient, err = lql.NewClient(minConns, maxConns, "unix", localSocket)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return
@@ -126,19 +134,12 @@ If you don't provide ssh-keyfile and ssh-password I will use your local agent.
 		defer lqlClient.Close()
 		lqlClient.SetLogger(logger)
 
-		// gin.SetMode(gin.ReleaseMode)
-		r := gin.New()
+		server, err := lql.NewServer(lqlClient, logger, "")
+		if err != nil {
+			logger.WithField("error", err).Error()
+			return
+		}
 
-		r.Use(ginlogrus.Logger(logger), gin.Recovery())
-
-		url := ginSwagger.URL("/swagger/doc.json") // The url pointing to API definition
-		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
-
-		r.GET("/", func(c *gin.Context) {
-			c.Redirect(http.StatusPermanentRedirect, "/swagger/index.html")
-		})
-
-		logger.Debug("Starting the API Server")
-		r.Run(":8080")
+		server.ListenAndServe(":8080")
 	},
 }
