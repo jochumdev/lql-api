@@ -26,7 +26,7 @@ Connects to your Server by SSH opens a SSH tunnel to the server's lql Socket and
 
 Prints the version
 
-## OpenAPI 3.0 Support in sshserver
+## OpenAPI 3.0 Support in sshserver and localserver
 
 This support's OpenAPI 3.0 use the url http://localhost:8080/openapi.json and browse it over an OpenAPI browser.
 
