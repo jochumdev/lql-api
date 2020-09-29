@@ -1,0 +1,42 @@
+Source: lql-api
+Maintainer: Webmeisterei Support <support@webmeisterei.com>
+Uploaders: Webmeisterei Support <support@webmeisterei.com>
+Section: devel
+Testsuite: autopkgtest-pkg-go
+Priority: optional
+Build-Depends: debhelper-compat (= 12),
+               dh-golang,
+               golang-any,
+               golang-github-abbot-go-http-auth-dev,
+               golang-github-gin-contrib-cors-dev,
+               golang-github-gin-gonic-gin-dev,
+               golang-github-spf13-cobra-dev,
+               golang-github-stretchr-testify-dev,
+               golang-golang-x-crypto-dev,
+               golang-logrus-dev
+Standards-Version: 4.5.0
+Vcs-Browser: https://github.com/webmeisterei/lql_api
+Vcs-Git: https://github.com/webmeisterei/lql_api.git
+Homepage: https://github.com/webmeisterei/lql_api
+Rules-Requires-Root: no
+XS-Go-Import-Path: github.com/webmeisterei/lql_api
+
+Package: lql-api
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Built-Using: ${misc:Built-Using}
+Description: LQL API Server for check_mk (program)
+ LQL API Server for check_mk
+ .
+ See the LQL Docs (https://checkmk.com/cms_livestatus.html) for what LQL
+ can do for you.  Commands the client supportslocalclient - Local LQL
+ Client requires a local lql unix socket localserver: Local LQL Server
+ requires a local lql unix socket sshclient: SSH LQL Client connects to
+ your Server by SSH opens a SSH tunnel to the server's lql Socket and
+ runs a query on it.  sshserver: SSH LQL Server Connects to your Server
+ by SSH opens a SSH tunnel to the server's lql Socket and runs an API
+ Server for that socket.  Version Prints the version OpenAPI 3.0 Support
+ in sshserver and localserver This support's OpenAPI 3.0 use the url
+ http://localhost:8080/openapi.json and browse it over an OpenAPI browser.
+ License MIT - Copyright 2020 by Webmeisterei GmbH

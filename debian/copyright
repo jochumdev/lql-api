@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: lql_api
+Upstream-Contact: support@webmeisterei.com
+Source: https://github.com/webmeisterei/lql_api
+
+Files: *
+Copyright: 2020 Webmeisterei GmbH - Büro für Netzfragen
+License: Expat
+
+Files: debian/*
+Copyright: 2020 Webmeisterei GmbH - Büro für Netzfragen
+License: Expat
+Comment: Debian packaging is licensed under the same terms as upstream
+
+License: Expat
+ TODO
