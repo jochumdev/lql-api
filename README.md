@@ -30,6 +30,20 @@ Prints the version
 
 This support's OpenAPI 3.0 use the url http://localhost:8080/openapi.json and browse it over an OpenAPI browser.
 
+## Build a debian package
+
+if you use gvm
+
+```bash
+gvm use system; make debian; gvm use go1.15.1
+```
+
+else
+
+```bash
+make debian
+```
+
 ## License
 
 MIT - Copyright 2020 by Webmeisterei GmbH
