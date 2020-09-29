@@ -1,0 +1,19 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the LQL API for your check_mk Server.",
+        "title": "LQL API",
+        "contact": {
+            "name": "Developers",
+            "url": "https://github.com/webmeisterei/lql_api/issues",
+            "email": "support@webmeisterei.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/webmeisterei/lql_api/blob/master/LICENSE"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/v1",
+    "paths": {}
+}
