@@ -1,6 +1,6 @@
 version=4
 opts="mode=git, pgpmode=none" \
-  https://github.com/webmeisterei/lql_api.git \
+  https://github.com/webmeisterei/lql-api.git \
   HEAD debian
 
 # Use the following when upstream starts to tag releases:
@@ -8,4 +8,4 @@ opts="mode=git, pgpmode=none" \
 #version=4
 #opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%lql-api-$1.tar.gz%,\
 #      uversionmangle=s/(\d)[_\.\-\+]?(RC|rc|pre|dev|beta|alpha)[.]?(\d*)$/\$1~\$2\$3/" \
-#  https://github.com/webmeisterei/lql_api/tags .*/v?(\d\S*)\.tar\.gz debian
+#  https://github.com/webmeisterei/lql-api/tags .*/v?(\d\S*)\.tar\.gz debian

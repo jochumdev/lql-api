@@ -1,4 +1,4 @@
-# lql_api
+# lql-api
 
 LQL API Server for check_mk
 

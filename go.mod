@@ -1,4 +1,4 @@
-module github.com/webmeisterei/lql_api
+module github.com/webmeisterei/lql-api
 
 go 1.15
 

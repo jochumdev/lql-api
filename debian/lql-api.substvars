@@ -1,0 +1,4 @@
+shlibs:Depends=libc6 (>= 2.4)
+misc:Built-Using=golang-1.15 (= 1.15.2-1)
+misc:Depends=
+misc:Pre-Depends=

@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webmeisterei/lql_api/internal/gncp"
-	"github.com/webmeisterei/lql_api/internal/utils"
+	"github.com/webmeisterei/lql-api/internal/gncp"
+	"github.com/webmeisterei/lql-api/internal/utils"
 
 	log "github.com/sirupsen/logrus"
 )

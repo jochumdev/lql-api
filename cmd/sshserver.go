@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	myssh "github.com/webmeisterei/lql_api/internal/ssh"
-	"github.com/webmeisterei/lql_api/lql"
+	myssh "github.com/webmeisterei/lql-api/internal/ssh"
+	"github.com/webmeisterei/lql-api/lql"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 

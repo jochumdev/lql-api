@@ -9,7 +9,7 @@ var (
 	cfgFile string
 
 	rootCmd = &cobra.Command{
-		Use:   "lql_api",
+		Use:   "lql-api",
 		Short: "Check_MK LQL API Client/Server",
 		Long:  ``,
 	}

@@ -11,7 +11,7 @@ import (
 	"syscall"
 
 	"github.com/spf13/cobra"
-	"github.com/webmeisterei/lql_api/lql"
+	"github.com/webmeisterei/lql-api/lql"
 
 	log "github.com/sirupsen/logrus"
 )

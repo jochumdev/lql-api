@@ -19,8 +19,8 @@ ifneq ($(shell git status --porcelain),)
 endif
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS=-ldflags '-w -s -X github.com/webmeisterei/lql_api/version.Version=${VERSION}'
-LDFLAGS_STATIC=-ldflags '-extldflags "-static" -w -s -X github.com/webmeisterei/lql_api/version.Version=${VERSION}'
+LDFLAGS=-ldflags '-w -s -X github.com/webmeisterei/lql-api/version.Version=${VERSION}'
+LDFLAGS_STATIC=-ldflags '-extldflags "-static" -w -s -X github.com/webmeisterei/lql-api/version.Version=${VERSION}'
 
 build:
 	go build -o ${BINARY} -a ${LDFLAGS}
@@ -36,7 +36,7 @@ install:
 
 .PHONY: debian
 debian:
-	GOPROXY= dpkg-buildpackage -us -uc
+	GOPROXY= dpkg-buildpackage -b -rfakeroot -us -uc
 
 # Cleans our project: deletes binaries
 clean:

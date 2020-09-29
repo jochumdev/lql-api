@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: lql_api
+Upstream-Name: lql-api
 Upstream-Contact: support@webmeisterei.com
-Source: https://github.com/webmeisterei/lql_api
+Source: https://github.com/webmeisterei/lql-api
 
 Files: *
 Copyright: 2020 Webmeisterei GmbH - Büro für Netzfragen

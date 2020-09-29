@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/webmeisterei/lql_api/version"
+	"github.com/webmeisterei/lql-api/version"
 )
 
 func init() {
@@ -16,6 +16,6 @@ var versionCmd = &cobra.Command{
 	Short: "Prints the version",
 	Long:  `Even I have a version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("lql_api %s\n", version.Version)
+		fmt.Printf("lql-api %s\n", version.Version)
 	},
 }
