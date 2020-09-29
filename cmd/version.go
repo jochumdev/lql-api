@@ -13,7 +13,7 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number of lql_api_proxy",
+	Short: "Prints the version",
 	Long:  `Even I have a version`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("lql_api %s\n", version.Version)

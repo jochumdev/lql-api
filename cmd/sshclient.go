@@ -44,7 +44,7 @@ var sshClientCmd = &cobra.Command{
 
 This version connects to the Check_MK Server by SSH.
 
-If you don't provide ssh-keyfile and ssh-password I will use your local agent.
+If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 	`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {

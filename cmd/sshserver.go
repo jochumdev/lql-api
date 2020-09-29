@@ -26,7 +26,7 @@ func init() {
 	sshServerCmd.Flags().IntVarP(&sshServerMaxConns, "max-conns", "x", 5, "maximal Client Connections")
 
 	sshServerCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket on the Server")
-	sshServerCmd.Flags().StringP("htpasswd", "h", "", "htpasswd file, default: NO authentication")
+	sshServerCmd.Flags().StringP("htpasswd", "t", "", "htpasswd file, default: NO authentication")
 	sshServerCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	sshServerCmd.Flags().StringP("ssh-user", "U", "root", "SSH User")
 	sshServerCmd.Flags().StringP("ssh-keyfile", "k", "~/.ssh/id_rsa", "Keyfile")
@@ -41,7 +41,7 @@ var sshServerCmd = &cobra.Command{
 
 This version connects to the Check_MK Server by SSH.
 
-If you don't provide ssh-keyfile and ssh-password I will use your local agent.
+If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 	`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
