@@ -63,7 +63,7 @@ If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 		sReplacer := strings.NewReplacer("{site}", args[0])
 		destSocket = sReplacer.Replace(destSocket)
 
-		localSocket := path.Join(os.TempDir(), "lql-client.sock")
+		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
 		var tunnel *myssh.Tunnel
 		var lqlClient *lql.Client
 

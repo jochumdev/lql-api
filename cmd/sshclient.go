@@ -50,7 +50,7 @@ If you don't provide ssh-keyfile and ssh-password it will use your local agent.
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[1])
 		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
-		localSocket := path.Join(os.TempDir(), "lql-client.sock")
+		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
 		var tunnel *myssh.Tunnel
 		var lqlClient *lql.Client
 		logger := log.New()
