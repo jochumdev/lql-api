@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	auth "github.com/abbot/go-http-auth"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -48,9 +47,7 @@ All v1/ endpoints require http basic auth`,
 	// Setup routes.
 	v1Group := fizz.Group("/v1", "v1", "LQL API v1")
 	if htpasswdPath != "" {
-		htpasswd := auth.HtpasswdFileProvider(htpasswdPath)
-		authenticator := auth.NewBasicAuthenticator("LQL API", htpasswd)
-		v1Group.Use(basicAuthMiddleware(authenticator))
+		v1Group.Use(basicAuthWithWatcherMiddleware(htpasswdPath, "LQL API"))
 	} else {
 		// Inject empty user if not .htpasswd have been given
 		v1Group.Use(func(c *gin.Context) {
@@ -65,6 +62,10 @@ All v1/ endpoints require http basic auth`,
 		return nil, fmt.Errorf("fizz errors: %v", fizz.Errors())
 	}
 	return &Server{fizz: fizz, htpasswdPath: htpasswdPath}, nil
+}
+
+func (s *Server) GetRouter() *fizz.Fizz {
+	return s.fizz
 }
 
 func (s *Server) ListenAndServe(address string) {

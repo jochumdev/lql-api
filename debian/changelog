@@ -4,32 +4,36 @@ lql-api (0.0.7) UNRELEASED; urgency=medium
   * Add filtering
   * Try reconnect on EPIPE maybe fixes conn problems
   * Improve example.sh
+  * Document localserver installing
+  * Properly reconnect in lql.Client
+  * Add help outputs to the README
+  * Update docs
 
- -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 14:03:30 +0200
+ -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 16:15:17 +0200
 
 lql-api (0.0.6) UNRELEASED; urgency=medium
 
   * Use GncpPool.Put, maybe fixes connection problems
 
- -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
+ -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.5) UNRELEASED; urgency=medium
 
   * Rename host -> hosts in stats/tactical_overview
 
- -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
+ -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.4) UNRELEASED; urgency=medium
 
   * Add /v1/table/:name and /v1/table/:name/columns
 
- -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
+ -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.3) UNRELEASED; urgency=medium
 
   * Add ping API
 
- -- Webmeisterei Support <support@webmeisterei.com> Tue, 30 Sep 2020 01:31:46 +0200
+ -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 01:31:46 +0200
 
 lql-api (0.0~git20200929.ca3764e-1) UNRELEASED; urgency=medium
 

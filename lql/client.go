@@ -190,7 +190,6 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 			if err != nil {
 				return nil, err
 			}
-			conn.Close()
 
 			_, err = conn.Write([]byte(request))
 			if err != nil && errors.Is(err, syscall.EPIPE) {
