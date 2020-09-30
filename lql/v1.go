@@ -12,7 +12,7 @@ func v1Routes(grp *fizz.RouterGroup) {
 	}, tonic.Handler(v1RawPost, 200))
 
 	grp.GET("/ping", []fizz.OperationOption{
-		fizz.Summary("GET Play ping-ping with the API"),
+		fizz.Summary("Play ping-ping with the API"),
 		fizz.Response("400", "Bad request", nil, nil),
 	}, tonic.Handler(v1Ping, 200))
 

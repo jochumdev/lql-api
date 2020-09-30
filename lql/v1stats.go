@@ -7,7 +7,7 @@ import (
 )
 
 type V1StatsTacticalOverview struct {
-	Host     *V1StatsTacticalOverviewEntry `json:"host" validate:"required" description:"Host stats"`
+	Hosts    *V1StatsTacticalOverviewEntry `json:"hosts" validate:"required" description:"Host stats"`
 	Services *V1StatsTacticalOverviewEntry `json:"services" validate:"required" description:"Service stats"`
 	Events   *V1StatsTacticalOverviewEntry `json:"events" validate:"required" description:"Event stats"`
 }
@@ -116,5 +116,5 @@ StatsAnd: 3`
 	ev.Unhandled = rsp[0]["stats_3"].(float64)
 	ev.Stale = 0
 
-	return &V1StatsTacticalOverview{Host: host, Services: svc, Events: ev}, nil
+	return &V1StatsTacticalOverview{Hosts: host, Services: svc, Events: ev}, nil
 }

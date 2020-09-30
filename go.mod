@@ -9,6 +9,7 @@ require (
 	github.com/loopfz/gadgeto v0.10.1
 	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/cobra v1.0.0
+	github.com/stretchr/testify v1.4.0
 	github.com/toorop/gin-logrus v0.0.0-20200831135515-d2ee50d38dae
 	github.com/wI2L/fizz v0.13.4
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
