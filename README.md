@@ -169,7 +169,7 @@ Next create /etc/lql-api/`site`, with the following contents:
 
 ```bash
 LISTEN="localhost:8080"
-DEBUG="-d"
+DEBUG=""
 ```
 
 Now you can start the lql-api
