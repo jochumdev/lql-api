@@ -8,9 +8,10 @@ import (
 )
 
 var v1TableColumns = map[string][]string{}
+var v1TableFilters = map[string][]string{}
 
 func init() {
-	v1TableColumns = make(map[string][]string, 1) // Increment this when you add tables
+	v1TableColumns = make(map[string][]string, 2) // Increment this when you add tables
 	v1TableColumns["hosts"] = []string{
 		"name",
 		"display_name",
@@ -22,12 +23,39 @@ func init() {
 		"latency",
 		"parents",
 	}
+	v1TableColumns["services"] = []string{
+		"host_name",
+		"display_name",
+		"description",
+		"plugin_output",
+	}
+
+	v1TableFilters = make(map[string][]string, 3)
+	v1TableFilters["service_problems"] = []string{
+		"Filter: state > 0",
+		"Filter: scheduled_downtime_depth = 0",
+		"Filter: host_scheduled_downtime_depth = 0",
+		"Filter: host_state = 0",
+	}
+	v1TableFilters["service_unhandled"] = []string{
+		"Filter: state > 0",
+		"Filter: scheduled_downtime_depth = 0",
+		"Filter: host_scheduled_downtime_depth = 0",
+		"Filter: acknowledged = 0",
+		"Filter: host_state = 0",
+	}
+	v1TableFilters["service_stale"] = []string{
+		"Filter: service_staleness >= 1.5",
+		"Filter: host_scheduled_downtime_depth = 0",
+		"Filter: service_scheduled_downtime_depth = 0",
+	}
 }
 
 type v1TableGetParams struct {
-	Table   string   `path:"name"`
-	Columns *string  `query:"columns" description:"Columns to return" validate:"omitempty"`
-	Limit   *float64 `query:"limit" description:"Limit number of results" validate:"omitempty,min=0"`
+	Table  string    `path:"name"`
+	Column *[]string `query:"column" description:"Columns to return" validate:"omitempty"`
+	Filter *[]string `query:"filter" description:"Filter to apply on the table" validate:"omitempty"`
+	Limit  *float64  `query:"limit" description:"Limit number of results" validate:"omitempty,min=0"`
 }
 
 func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
@@ -38,8 +66,15 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 	user := c.GetString("user")
 
 	columns := ""
-	if params.Columns != nil {
-		columns = strings.Join(strings.Split(*params.Columns, ","), " ")
+	containsAll := false
+	if params.Column != nil {
+		for _, col := range *params.Column {
+			if col == "all" {
+				containsAll = true
+				break
+			}
+		}
+		columns = strings.Join(*params.Column, " ")
 	} else if defaultCols, ok := v1TableColumns[params.Table]; ok {
 		columns = strings.Join(defaultCols, " ")
 	} else {
@@ -51,7 +86,27 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 		limit = int(*params.Limit)
 	}
 
-	lines := []string{fmt.Sprintf("GET %s", params.Table), fmt.Sprintf("Columns: %s", columns)}
+	lines := []string{fmt.Sprintf("GET %s", params.Table)}
+	if !containsAll {
+		lines = append(lines, fmt.Sprintf("Columns: %s", columns))
+	}
+
+	if params.Filter != nil {
+		filters := []string{}
+		for _, filter := range *params.Filter {
+			if addFilters, ok := v1TableFilters[filter]; ok {
+				filters = append(filters, addFilters...)
+				continue
+			}
+			if filter[0:7] != "Filter:" {
+				return nil, fmt.Errorf("Invalid Filter '%s' given", filter)
+			}
+
+			filters = append(filters, filter)
+		}
+		lines = append(lines, filters...)
+	}
+
 	resp, err := client.Request(c, strings.Join(lines, "\n"), user, limit)
 	if err != nil {
 		return nil, err
