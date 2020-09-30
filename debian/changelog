@@ -1,8 +1,12 @@
-lql-api (0.0.5) UNRELEASED; urgency=medium
+lql-api (0.0.6) UNRELEASED; urgency=medium
 
   * Use GncpPool.Put, maybe fixes connection problems
+
+ -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
+
+lql-api (0.0.5) UNRELEASED; urgency=medium
+
   * Rename host -> hosts in stats/tactical_overview
-  * Use GncpPool.Put, maybe fixes connection problems
 
  -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
 
