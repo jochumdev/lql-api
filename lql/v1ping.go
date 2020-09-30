@@ -16,5 +16,5 @@ Columns: name`
 		return nil, err
 	}
 
-	return gin.H{"message": "ok"}, nil
+	return gin.H{"message": "pong"}, nil
 }

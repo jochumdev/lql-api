@@ -12,7 +12,7 @@ func v1Routes(grp *fizz.RouterGroup) {
 	}, tonic.Handler(v1RawPost, 200))
 
 	grp.GET("/ping", []fizz.OperationOption{
-		fizz.Summary("GET ping"),
+		fizz.Summary("GET Play ping-ping with the API"),
 		fizz.Response("400", "Bad request", nil, nil),
 	}, tonic.Handler(v1Ping, 200))
 
@@ -20,4 +20,14 @@ func v1Routes(grp *fizz.RouterGroup) {
 		fizz.Summary("GET tactical overview data"),
 		fizz.Response("400", "Bad request", nil, nil),
 	}, tonic.Handler(v1StatsGetTacticalOverview, 200))
+
+	grp.GET("/table/:name", []fizz.OperationOption{
+		fizz.Summary("GET a table from LQL"),
+		fizz.Response("400", "Bad request", nil, nil),
+	}, tonic.Handler(v1TableGet, 200))
+
+	grp.GET("/table/:name/columns", []fizz.OperationOption{
+		fizz.Summary("GET a table columns from LQL"),
+		fizz.Response("400", "Bad request", nil, nil),
+	}, tonic.Handler(v1TableGetColumns, 200))
 }

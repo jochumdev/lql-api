@@ -20,6 +20,7 @@ type Server struct {
 }
 
 func NewServer(client *Client, logger *log.Logger, htpasswdPath string) (*Server, error) {
+	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
 	engine.Use(cors.Default())
 	engine.Use(ginlogrus.Logger(logger), gin.Recovery(), clientInjectorMiddleware(client))
