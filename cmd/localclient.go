@@ -33,7 +33,19 @@ var localClientCmd = &cobra.Command{
 	Short: "Local LQL Client",
 	Long: `Local LQL Client
 	
-Requires a local lql unix socket.`,
+Requires a local lql unix socket.
+
+Examples:
+
+- Fetch first row from the hosts table:
+
+    $ lql-api localclient mysite -t hosts -c name -c address -c groups -l 1
+
+- The same with stdin:
+
+    $ echo -e "GET hosts\nColumns: name address groups\nLimit: 1" | lql-api localclient mysite
+
+`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])

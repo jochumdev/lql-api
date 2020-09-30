@@ -45,10 +45,21 @@ var sshClientCmd = &cobra.Command{
 This version connects to the Check_MK Server by SSH.
 
 If you don't provide ssh-keyfile and ssh-password it will use your local agent.
-	`,
+
+Examples:
+
+- Fetch first row from the hosts table:
+
+    $ lql-api sshclient mysite myinternal.host.name -U mysite -t hosts -c name -c address -c groups -l 1
+
+- The same with stdin:
+
+    $ echo -e "GET hosts\nColumns: name address groups\nLimit: 1" | lql-api sshclient mysite myinternal.host.name -U mysite
+
+`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		sReplacer := strings.NewReplacer("{site}", args[1])
+		sReplacer := strings.NewReplacer("{site}", args[0])
 		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
 		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
 		var tunnel *myssh.Tunnel

@@ -43,7 +43,17 @@ var sshServerCmd = &cobra.Command{
 This version connects to the Check_MK Server by SSH.
 
 If you don't provide ssh-keyfile and ssh-password it will use your local agent.
-	`,
+
+Examples:
+
+- With Debug and a single connection:
+
+    $ lql-api sshserver mysite myinternal.host.name -d -m 1 -x 1 -U mysite
+
+- Without Debug and maximum 5 connections:
+
+    $ lql-api sshserver mysite myinternal.host.name -m 1 -x 5 -U mysite
+`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 

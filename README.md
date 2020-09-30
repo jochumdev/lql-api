@@ -14,6 +14,16 @@ Local LQL Client
 
 Requires a local lql unix socket.
 
+Examples:
+
+- Fetch first row from the hosts table:
+
+    $ lql-api localclient mysite -t hosts -c name -c address -c groups -l 1
+
+- The same with stdin:
+
+    $ echo -e "GET hosts\nColumns: name address groups\nLimit: 1" | lql-api localclient mysite
+
 Usage:
   lql-api localclient [site] [flags]
 
@@ -49,6 +59,8 @@ Flags:
   -s, --socket string     Socket (default "/opt/omd/sites/{site}/tmp/run/live")
 ```
 
+See the Installing docs for it.
+
 ### sshclient: SSH LQL Client
 
 ```
@@ -58,6 +70,16 @@ SSH LQL Client
 This version connects to the Check_MK Server by SSH.
 
 If you don't provide ssh-keyfile and ssh-password it will use your local agent.
+
+Examples:
+
+- Fetch first row from the hosts table:
+
+    $ lql-api sshclient mysite myinternal.host.name -U mysite -t hosts -c name -c address -c groups -l 1
+
+- The same with stdin:
+
+    $ echo -e "GET hosts\nColumns: name address groups\nLimit: 1" | lql-api sshclient mysite myinternal.host.name -U mysite
 
 Usage:
   lql-api sshclient [site] [server] [flags]
@@ -85,6 +107,16 @@ SSH LQL Server
 This version connects to the Check_MK Server by SSH.
 
 If you don't provide ssh-keyfile and ssh-password it will use your local agent.
+
+Examples:
+
+- With Debug and a single connection:
+
+    $ lql-api sshserver mysite myinternal.host.name -d -m 1 -x 1 -U mysite
+
+- Without Debug and maximum 5 connections:
+
+    $ lql-api sshserver mysite myinternal.host.name -m 1 -x 5 -U mysite
 
 Usage:
   lql-api sshserver [site] [server] [flags]
