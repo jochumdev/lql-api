@@ -47,7 +47,7 @@ All v1/ endpoints require http basic auth`,
 	// Setup routes.
 	v1Group := fizz.Group("/v1", "v1", "LQL API v1")
 	if htpasswdPath != "" {
-		v1Group.Use(basicAuthWithWatcherMiddleware(htpasswdPath, "LQL API"))
+		v1Group.Use(basicAuthMiddleware(htpasswdPath, "LQL API"))
 	} else {
 		// Inject empty user if not .htpasswd have been given
 		v1Group.Use(func(c *gin.Context) {

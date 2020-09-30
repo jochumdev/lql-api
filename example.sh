@@ -14,7 +14,7 @@ ARGS=$2
 # Execute
 set -ex
 
-CURL="/usr/bin/curl $2 -s -f"
+CURL="/usr/bin/curl $2 -q -f"
 
 # GET Hosts
 # $CURL -X POST -d '{"method": "GET", "table": "hosts", "columns": ["name", "address"]}' $SERVER/v1/raw

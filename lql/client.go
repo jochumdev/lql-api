@@ -177,14 +177,13 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 	if err != nil && !errors.Is(err, syscall.EPIPE) {
 		return nil, err
 	} else if errors.Is(err, syscall.EPIPE) {
+		conn.Close()
+		conn.(*gncp.CpConn).Destroy()
 
 		// Destroy -> Create Connections until we don't get EPIPE.
 		numTries := 0
 		for errors.Is(err, syscall.EPIPE) {
 			c.logger.WithField("error", err).Debug("Trying to reconnect")
-
-			conn.Close()
-			conn.(*gncp.CpConn).Destroy()
 
 			conn, err = c.pool.GetWithContext(context)
 			if err != nil {
@@ -192,12 +191,15 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 			}
 
 			_, err = conn.Write([]byte(request))
-			if err != nil && errors.Is(err, syscall.EPIPE) {
+			if err != nil && !errors.Is(err, syscall.EPIPE) {
 				return nil, err
 			}
 
+			conn.Close()
+			c.pool.Remove(conn)
+
 			numTries++
-			if numTries >= c.pool.GetMaxConns()*2 {
+			if numTries >= (c.pool.GetMaxConns() * 2) {
 				c.logger.WithField("error", err).Error("To much retries can't reconnect")
 				// Bailout to much tries
 				return nil, err

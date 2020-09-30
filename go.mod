@@ -13,5 +13,4 @@ require (
 	github.com/toorop/gin-logrus v0.0.0-20200831135515-d2ee50d38dae
 	github.com/wI2L/fizz v0.13.4
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
-	gopkg.in/fsnotify.v1 v1.4.7
 )
