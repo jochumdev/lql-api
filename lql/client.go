@@ -9,6 +9,7 @@ import (
 	"net"
 	"strconv"
 	"strings"
+	"syscall"
 
 	"github.com/gin-gonic/gin"
 	"github.com/webmeisterei/lql-api/internal/gncp"
@@ -170,13 +171,38 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 	if err != nil {
 		return nil, err
 	}
-	defer c.pool.Put(conn)
 
 	c.logger.WithField("request", request).Debug("Writing request")
 	_, err = conn.Write([]byte(request))
-	if err != nil {
+	if err != nil && errors.Is(err, syscall.EPIPE) {
 		return nil, err
+	} else if errors.Is(err, syscall.EPIPE) {
+
+		// Destroy -> Create Connections until we don't get EPIPE.
+		numTries := 0
+		for errors.Is(err, syscall.EPIPE) {
+			conn.Close()
+			conn.(*gncp.CpConn).Destroy()
+
+			conn, err = c.pool.GetWithContext(context)
+			if err != nil {
+				return nil, err
+			}
+			conn.Close()
+
+			_, err = conn.Write([]byte(request))
+			if err != nil && errors.Is(err, syscall.EPIPE) {
+				return nil, err
+			}
+
+			numTries++
+			if numTries >= 20 {
+				// Bailout to much tries
+				return nil, err
+			}
+		}
 	}
+	defer conn.Close()
 
 	tmpBuff := make([]byte, 1024)
 	n, err := conn.Read(tmpBuff)

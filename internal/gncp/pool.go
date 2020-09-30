@@ -154,7 +154,7 @@ func (p *GncpPool) Put(conn net.Conn) error {
 		p.lock.Lock()
 		p.totalConnNum = p.totalConnNum - 1
 		p.lock.Unlock()
-		return errors.New("Cannot put nil to connection pool.")
+		return errors.New("Cannot put nil to connection pool")
 	}
 
 	select {

@@ -15,7 +15,7 @@ type CpConn struct {
 // Destroy will close connection and release connection from connection pool.
 func (conn *CpConn) Destroy() error {
 	if conn.pool == nil {
-		return errors.New("Connection not belong any connection pool.")
+		return errors.New("Connection not belong any connection pool")
 	}
 	err := conn.pool.Remove(conn.Conn)
 	if err != nil {
@@ -28,7 +28,7 @@ func (conn *CpConn) Destroy() error {
 // Close will push connection back to connection pool. It will not close the real connection.
 func (conn *CpConn) Close() error {
 	if conn.pool == nil {
-		return errors.New("Connection not belong any connection pool.")
+		return errors.New("Connection not belong any connection pool")
 	}
 	return conn.pool.Put(conn.Conn)
 }
