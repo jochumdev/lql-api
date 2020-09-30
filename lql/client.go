@@ -170,7 +170,7 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 	if err != nil {
 		return nil, err
 	}
-	defer conn.Close()
+	defer c.pool.Put(conn)
 
 	c.logger.WithField("request", request).Debug("Writing request")
 	_, err = conn.Write([]byte(request))
