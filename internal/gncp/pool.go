@@ -70,6 +70,11 @@ func (p *GncpPool) init() error {
 	return nil
 }
 
+// GetMaxConns returns the maximum number of connections configured
+func (p *GncpPool) GetMaxConns() int {
+	return p.maxConnNum
+}
+
 // Get get connection from connection pool. If connection poll is empty and alreay created connection number less than Max number of connection
 // it will create new one. Otherwise it wil wait someone put connection back.
 func (p *GncpPool) Get() (net.Conn, error) {
