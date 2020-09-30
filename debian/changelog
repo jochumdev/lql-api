@@ -1,3 +1,9 @@
+lql-api (0.0.5) UNRELEASED; urgency=medium
+
+  * Rename host -> hosts in stats/tactical_overview
+
+ -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 04:00:32 +0200
+
 lql-api (0.0.4) UNRELEASED; urgency=medium
 
   * Add /v1/table/:name and /v1/table/:name/columns
