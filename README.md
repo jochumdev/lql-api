@@ -8,19 +8,99 @@ See [the LQL Docs](https://checkmk.com/cms_livestatus.html) for what LQL can do 
 
 ### localclient - Local LQL Client
 
-requires a local lql unix socket
+```
+$ lql-api localclient -h
+Local LQL Client
+
+Requires a local lql unix socket.
+
+Usage:
+  lql-api localclient [site] [flags]
+
+Flags:
+  -c, --columns stringArray   Columns to show from the given table, this is required if you give a table!
+  -d, --debug                 Enable Debug on stderr
+  -f, --format string         Format one of: python, python3, json, csv, CSV, jsonparsed (default is jsonparsed, I parse json from the server) (default "jsonparsed")
+  -h, --help                  help for localclient
+  -l, --limit int             Limit request lines
+  -s, --socket string         Socket on the Server (default "/opt/omd/sites/{site}/tmp/run/live")
+  -t, --table string          Produce a GET request for the given table (default: supply request by stdin)
+  -u, --user string           LQL user to limit this on
+```
 
 ### localserver: Local LQL Server
 
-requires a local lql unix socket
+```
+$ lql-api localserver -h
+Local LQL Server
+
+Requires a local lql unix socket.
+
+Usage:
+  lql-api localserver [site] [flags]
+
+Flags:
+  -d, --debug             Enable Debug on stderr
+  -h, --help              help for localserver
+  -t, --htpasswd string   htpasswd file (default "/opt/omd/sites/{site}/etc/htpasswd")
+  -l, --listen string     Address to listen on (default ":8080")
+  -x, --max-conns int     maximal Client Connections (default 5)
+  -m, --min-conns int     minimal Client Connections (default 2)
+  -s, --socket string     Socket (default "/opt/omd/sites/{site}/tmp/run/live")
+```
 
 ### sshclient: SSH LQL Client
 
-connects to your Server by SSH opens a SSH tunnel to the server's lql Socket and runs a query on it.
+```
+$ lql-api sshclient -h
+SSH LQL Client
+
+This version connects to the Check_MK Server by SSH.
+
+If you don't provide ssh-keyfile and ssh-password it will use your local agent.
+
+Usage:
+  lql-api sshclient [site] [server] [flags]
+
+Flags:
+  -c, --columns stringArray   Columns to show from the given table, this is required if you give a table!
+  -d, --debug                 Enable Debug on stderr
+  -f, --format string         Format one of: python, python3, json, csv, CSV, jsonparsed (default is jsonparsed, I parse json from the server) (default "jsonparsed")
+  -h, --help                  help for sshclient
+  -l, --limit int             Limit request lines
+  -s, --socket string         Socket on the Server (default "/opt/omd/sites/{site}/tmp/run/live")
+  -k, --ssh-keyfile string    Keyfile (default "~/.ssh/id_rsa")
+  -p, --ssh-password string   Password
+  -U, --ssh-user string       SSH User (default "root")
+  -t, --table string          Produce a GET request for the given table (default: supply request by stdin)
+  -u, --user string           LQL user to limit this on
+```
 
 ### sshserver: SSH LQL Server
 
-Connects to your Server by SSH opens a SSH tunnel to the server's lql Socket and runs an API Server for that socket.
+```
+$ lql-api sshserver -h
+SSH LQL Server
+
+This version connects to the Check_MK Server by SSH.
+
+If you don't provide ssh-keyfile and ssh-password it will use your local agent.
+
+Usage:
+  lql-api sshserver [site] [server] [flags]
+
+Flags:
+  -d, --debug                 Enable Debug on stderr
+  -h, --help                  help for sshserver
+  -t, --htpasswd string       htpasswd file, default: NO authentication
+  -l, --listen string         Address to listen on (default ":8080")
+  -x, --max-conns int         maximal Client Connections (default 5)
+  -m, --min-conns int         minimal Client Connections (default 2)
+  -s, --socket string         Socket on the Server (default "/opt/omd/sites/{site}/tmp/run/live")
+  -k, --ssh-keyfile string    Keyfile (default "~/.ssh/id_rsa")
+  -p, --ssh-password string   Password
+  -U, --ssh-user string       SSH User (default "root")
+```
 
 ### Version
 
