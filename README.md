@@ -44,6 +44,44 @@ else
 make debian
 ```
 
+## Installing the **localserver**
+
+First install the package, replace "site" with your real site.
+
+```bash
+dpkg -i <package>
+apt install -f
+```
+
+Next create /etc/lql-api/`site`, with the following contents:
+
+```bash
+LISTEN="localhost:8080"
+DEBUG="-d"
+```
+
+Now you can start the lql-api
+
+```bash
+systemctl start lql-api@<site>
+```
+
+Next create an apache proxy for it in /etc/apache2/conf-available/zzzz_`site`_lql-api.conf
+
+```apache
+<IfModule mod_proxy_http.c>
+  <Proxy http://127.0.0.1:8080/>
+    Order allow,deny
+    allow from all
+  </Proxy>
+
+  <Location /<site>/lql-api/>
+    ProxyPass http://127.0.0.1:8080/ retry=0 timeout=120
+    ProxyPassReverse http://127.0.0.1:8080/
+  </Location>
+</IfModule>
+```
+
 ## License
 
 MIT - Copyright 2020 by Webmeisterei GmbH
