@@ -1,20 +1,22 @@
 lql-api (0.0.5) UNRELEASED; urgency=medium
 
+  * Use GncpPool.Put, maybe fixes connection problems
   * Rename host -> hosts in stats/tactical_overview
+  * Use GncpPool.Put, maybe fixes connection problems
 
- -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 04:00:32 +0200
+ -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.4) UNRELEASED; urgency=medium
 
   * Add /v1/table/:name and /v1/table/:name/columns
 
- -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 01:31:46 +0200
+ -- Webmeisterei Support <support@webmeisterei.com> Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.3) UNRELEASED; urgency=medium
 
   * Add ping API
 
- -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 01:31:46 +0200
+ -- Webmeisterei Support <support@webmeisterei.com> Tue, 30 Sep 2020 01:31:46 +0200
 
 lql-api (0.0~git20200929.ca3764e-1) UNRELEASED; urgency=medium
 
