@@ -175,38 +175,46 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 	c.logger.WithField("request", request).Debug("Writing request")
 	_, err = conn.Write([]byte(request))
 	if err != nil && !errors.Is(err, syscall.EPIPE) {
+		c.logger.WithField("error", err).Debug("Removing failed connection")
+		c.pool.Remove(conn)
 		return nil, err
 	} else if errors.Is(err, syscall.EPIPE) {
-		conn.Close()
-		conn.(*gncp.CpConn).Destroy()
+		c.pool.Remove(conn)
 
 		// Destroy -> Create Connections until we don't get EPIPE.
 		numTries := 0
+		maxTries := c.pool.GetMaxConns() * 2
 		for errors.Is(err, syscall.EPIPE) {
-			c.logger.WithField("error", err).Debug("Trying to reconnect")
+			c.logger.WithFields(log.Fields{"error": err, "num_tries": numTries, "max_tries": maxTries, "max_conns": c.pool.GetMaxConns()}).Debug("Trying to reconnect")
 
 			conn, err = c.pool.GetWithContext(context)
 			if err != nil {
+				// Failed to get a connection, bailout
 				return nil, err
 			}
 
 			_, err = conn.Write([]byte(request))
 			if err != nil && !errors.Is(err, syscall.EPIPE) {
+				// Other error than EPIPE, bailout
+				c.logger.WithField("error", err).Debug("Removing failed connection")
+				c.pool.Remove(conn)
 				return nil, err
+			} else if err == nil {
+				// We are fine now
+				break
 			}
 
-			conn.Close()
 			c.pool.Remove(conn)
 
 			numTries++
-			if numTries >= (c.pool.GetMaxConns() * 2) {
+			if numTries >= maxTries {
 				c.logger.WithField("error", err).Error("To much retries can't reconnect")
 				// Bailout to much tries
 				return nil, err
 			}
 		}
 	}
-	defer conn.Close()
+	defer c.pool.Put(conn)
 
 	tmpBuff := make([]byte, 1024)
 	n, err := conn.Read(tmpBuff)

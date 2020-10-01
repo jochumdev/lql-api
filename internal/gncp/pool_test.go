@@ -134,7 +134,7 @@ func TestRemoveConn(t *testing.T) {
 	conn1, err := pool.Get()
 	err = pool.Remove(conn1)
 	if err != nil {
-		assert.Fail("Cannot remoce connection.")
+		assert.Fail("Cannot remove connection.")
 	}
 	err = conn1.Close()
 	if err != nil {
@@ -142,6 +142,42 @@ func TestRemoveConn(t *testing.T) {
 	}
 	assert.Fail("Need connection already removed error.")
 }
+
+func TestGetAllRemoveAndGetNew(t *testing.T) {
+	assert := assert.New(t)
+	maxConns := 3
+	pool, err := NewPool(1, maxConns, connCreator)
+	if err != nil {
+		assert.Fail("Init conn pool failed")
+	}
+
+	// Get and remove all connections
+	for i := 0; i < maxConns; i++ {
+		conn, err := pool.Get()
+		if err != nil {
+			assert.Fail("Get conn failed")
+		}
+		_, err = conn.Write([]byte(fmt.Sprintf("Test conn%d", i)))
+		if err != nil {
+			assert.Fail("Write message failed")
+		}
+		err = pool.Remove(conn)
+		if err != nil {
+			assert.Fail("Cannot remove connection")
+		}
+	}
+
+	// Now try to get another connection and write to it
+	conn, err := pool.Get()
+	if err != nil {
+		assert.Fail("Get conn failed")
+	}
+	_, err = conn.Write([]byte("Test conn1"))
+	if err != nil {
+		assert.Fail("Write message failed")
+	}
+}
+
 func connCreator() (net.Conn, error) {
 	return net.Dial("tcp", Host+":"+Port)
 }

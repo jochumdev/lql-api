@@ -150,7 +150,7 @@ func (p *GncpPool) Close() error {
 	return nil
 }
 
-// Put can put connection back in connection pool. If connection has been closed, the conneciton will be close too.
+// Put can put connection back in connection pool. If connection has been closed, the connection will be close too.
 func (p *GncpPool) Put(conn net.Conn) error {
 	if p.isClosed() == true {
 		return errPoolIsClose
@@ -177,22 +177,22 @@ func (p *GncpPool) isClosed() bool {
 	return ret
 }
 
-// RemoveConn let connection not belong connection pool.And it will close connection.
+// Remove let connection not belong connection pool. And it will close connection.
 func (p *GncpPool) Remove(conn net.Conn) error {
 	if p.isClosed() == true {
 		return errPoolIsClose
 	}
 
-	p.lock.Lock()
-	p.totalConnNum = p.totalConnNum - 1
-	p.lock.Unlock()
 	switch conn.(type) {
 	case *CpConn:
+		// Destroy calls pool.Remove, so do not decrease the number of connections here
 		return conn.(*CpConn).Destroy()
 	default:
+		p.lock.Lock()
+		p.totalConnNum = p.totalConnNum - 1
+		p.lock.Unlock()
 		return conn.Close()
 	}
-	return nil
 }
 
 // createConn will create one connection from connCreator. And increase connection counter.
@@ -200,11 +200,11 @@ func (p *GncpPool) createConn() (net.Conn, error) {
 	p.lock.Lock()
 	defer p.lock.Unlock()
 	if p.totalConnNum >= p.maxConnNum {
-		return nil, fmt.Errorf("Connot Create new connection. Now has %d.Max is %d", p.totalConnNum, p.maxConnNum)
+		return nil, fmt.Errorf("Connot Create a new connection. Pool now has %d conns. Max is %d", p.totalConnNum, p.maxConnNum)
 	}
 	conn, err := p.connCreator()
 	if err != nil {
-		return nil, fmt.Errorf("Cannot create new connection.%s", err)
+		return nil, fmt.Errorf("Cannot create a new connection: %s", err)
 	}
 	p.totalConnNum = p.totalConnNum + 1
 	return conn, nil

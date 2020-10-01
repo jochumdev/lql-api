@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"strings"
@@ -22,6 +23,7 @@ func init() {
 	localServerCmd.Flags().StringP("htpasswd", "t", "/opt/omd/sites/{site}/etc/htpasswd", "htpasswd file")
 	localServerCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	localServerCmd.Flags().StringP("listen", "l", ":8080", "Address to listen on")
+	localServerCmd.Flags().StringP("logfile", "f", "/opt/omd/sites/{site}/var/log/lql-api.log", "Logfile to log to")
 	rootCmd.AddCommand(localServerCmd)
 }
 
@@ -34,8 +36,23 @@ Requires a local lql unix socket.`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])
+
+		logfile, err := cmd.Flags().GetString("logfile")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		logfile = sReplacer.Replace(logfile)
+
+		f, err := os.OpenFile(logfile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0600)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		defer f.Close()
+
 		logger := log.New()
-		logger.SetOutput(os.Stderr)
+		logger.SetOutput(f)
 		if !cmd.Flag("debug").Changed {
 			logger.SetLevel(log.InfoLevel)
 		} else {

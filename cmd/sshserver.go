@@ -32,6 +32,7 @@ func init() {
 	sshServerCmd.Flags().StringP("ssh-keyfile", "k", "~/.ssh/id_rsa", "Keyfile")
 	sshServerCmd.Flags().StringP("ssh-password", "p", "", "Password")
 	sshServerCmd.Flags().StringP("listen", "l", ":8080", "Address to listen on")
+	sshServerCmd.Flags().StringP("logfile", "f", "lql-api-{site}.log", "Logfile to log to")
 	rootCmd.AddCommand(sshServerCmd)
 }
 
@@ -56,9 +57,24 @@ Examples:
 `,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
+		sReplacer := strings.NewReplacer("{site}", args[0])
+
+		logfile, err := cmd.Flags().GetString("logfile")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		logfile = sReplacer.Replace(logfile)
+
+		f, err := os.OpenFile(logfile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0600)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		defer f.Close()
 
 		logger := log.New()
-		logger.SetOutput(os.Stderr)
+		logger.SetOutput(f)
 		if !cmd.Flag("debug").Changed {
 			logger.SetLevel(log.InfoLevel)
 		} else {
@@ -70,7 +86,6 @@ Examples:
 			logger.WithField("error", err).Error()
 			return
 		}
-		sReplacer := strings.NewReplacer("{site}", args[0])
 		destSocket = sReplacer.Replace(destSocket)
 
 		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
