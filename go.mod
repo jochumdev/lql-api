@@ -12,5 +12,7 @@ require (
 	github.com/stretchr/testify v1.4.0
 	github.com/toorop/gin-logrus v0.0.0-20200831135515-d2ee50d38dae
 	github.com/wI2L/fizz v0.13.4
-	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
+	github.com/webmeisterei/go-http-auth v0.5.0
+	github.com/wolviecb/basic-auth v0.5.0
+	golang.org/x/crypto v0.0.0-20200930160638-afb6bcd081ae
 )
