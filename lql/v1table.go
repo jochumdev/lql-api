@@ -24,6 +24,7 @@ func init() {
 		"parents",
 	}
 	v1TableColumns["services"] = []string{
+		"state",
 		"host_name",
 		"display_name",
 		"description",
