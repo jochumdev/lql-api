@@ -35,7 +35,7 @@ $CURL "$SERVER/v1/table/hosts?columns=name&column=address&column=groups&limit=3"
 $CURL "$SERVER/v1/stats/tactical_overview"
 
 # Services
-$CURL "$SERVER/v1/table/services?limit=1&filter=service_unhandled"
+$CURL "$SERVER/v1/table/services?limit=1&filter=services_unhandled"
 
 # Services by hostname
 $CURL "$SERVER/v1/table/services?filter=Filter%3A%20host_name%20%3D%20checkmk01.%2A"

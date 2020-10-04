@@ -13,6 +13,7 @@ var v1TableFilters = map[string][]string{}
 func init() {
 	v1TableColumns = make(map[string][]string, 2) // Increment this when you add tables
 	v1TableColumns["hosts"] = []string{
+		"state",
 		"name",
 		"display_name",
 		"address",
@@ -31,24 +32,38 @@ func init() {
 		"plugin_output",
 	}
 
-	v1TableFilters = make(map[string][]string, 3)
-	v1TableFilters["service_problems"] = []string{
+	v1TableFilters = make(map[string][]string, 6)
+	v1TableFilters["services_problems"] = []string{
 		"Filter: state > 0",
 		"Filter: scheduled_downtime_depth = 0",
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: host_state = 0",
 	}
-	v1TableFilters["service_unhandled"] = []string{
+	v1TableFilters["services_unhandled"] = []string{
 		"Filter: state > 0",
 		"Filter: scheduled_downtime_depth = 0",
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: acknowledged = 0",
 		"Filter: host_state = 0",
 	}
-	v1TableFilters["service_stale"] = []string{
+	v1TableFilters["services_stale"] = []string{
 		"Filter: service_staleness >= 1.5",
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: service_scheduled_downtime_depth = 0",
+	}
+	v1TableFilters["hosts_problems"] = []string{
+		"Filter: state >= 0",
+		"Filter: state > 0",
+		"Filter: scheduled_downtime_depth = 0",
+	}
+	v1TableFilters["hosts_unhandled"] = []string{
+		"Filter: state > 0",
+		"Filter: scheduled_downtime_depth = 0",
+		"Filter: acknowledged = 0",
+	}
+	v1TableFilters["hosts_stale"] = []string{
+		"Filter: host_staleness >= 1.5",
+		"Filter: host_scheduled_downtime_depth = 0",
 	}
 }
 
