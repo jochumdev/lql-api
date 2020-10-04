@@ -1,8 +1,8 @@
 lql-api (0.0.11-alpha) UNRELEASED; urgency=medium
 
-  * No changes yet
+  * Detect if a user is Admin and do not send AuthUser
 
- -- René Jochum <rene@webmeisterei.com>  Sun, 04 Oct 2020 21:39:06 +0200
+ -- René Jochum <rene@webmeisterei.com>  Sun, 04 Oct 2020 23:53:41 +0200
 
 lql-api (0.0.10-alpha) RELEASED; urgency=medium
 
