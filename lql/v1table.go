@@ -65,6 +65,9 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 		return nil, err
 	}
 	user := c.GetString("user")
+	if client.IsAdmin(user) {
+		user = ""
+	}
 
 	columns := ""
 	containsAll := false
@@ -129,6 +132,9 @@ func v1TableGetColumns(c *gin.Context, params *v1TableGetColumnsParams) ([]strin
 		return nil, err
 	}
 	user := c.GetString("user")
+	if client.IsAdmin(user) {
+		user = ""
+	}
 
 	msg := fmt.Sprintf("GET columns\nColumns: name\nFilter: table = %s", params.Table)
 	resp, err := client.Request(c, msg, user, 0)

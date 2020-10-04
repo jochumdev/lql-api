@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/hashicorp/go-multierror v1.1.0
 	github.com/loopfz/gadgeto v0.10.1
+	github.com/micro/go-micro/v2 v2.9.1
 	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/cobra v1.0.0
 	github.com/stretchr/testify v1.4.0
@@ -16,4 +17,5 @@ require (
 	github.com/webmeisterei/go-http-auth v0.5.0
 	github.com/wolviecb/basic-auth v0.5.0
 	golang.org/x/crypto v0.0.0-20200930160638-afb6bcd081ae
+	gopkg.in/fsnotify.v1 v1.4.7
 )

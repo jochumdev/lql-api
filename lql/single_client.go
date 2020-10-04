@@ -53,6 +53,10 @@ func (c *SingleClient) SetLogger(logger *log.Logger) {
 	c.logger = logger
 }
 
+func (c *SingleClient) IsAdmin(username string) bool {
+	return false
+}
+
 func (c *SingleClient) Close() error {
 	c.logger.WithFields(log.Fields{"address": c.address}).Debug("Closing pool")
 	return c.pool.Close()

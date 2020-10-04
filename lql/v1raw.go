@@ -31,6 +31,9 @@ func v1RawPost(c *gin.Context, params *V1RawRequestParams) ([]gin.H, error) {
 		return nil, err
 	}
 	user := c.GetString("user")
+	if client.IsAdmin(user) {
+		user = ""
+	}
 
 	// Param validation and request building
 	request := []string{}

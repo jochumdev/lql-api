@@ -8,6 +8,9 @@ func v1Ping(c *gin.Context) (gin.H, error) {
 		return nil, err
 	}
 	user := c.GetString("user")
+	if client.IsAdmin(user) {
+		user = ""
+	}
 
 	msg := `GET hosts
 Columns: name`

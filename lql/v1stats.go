@@ -25,6 +25,9 @@ func v1StatsGetTacticalOverview(c *gin.Context) (*V1StatsTacticalOverview, error
 		return nil, err
 	}
 	user := c.GetString("user")
+	if client.IsAdmin(user) {
+		user = ""
+	}
 
 	msg := `GET hosts
 Stats: state >= 0

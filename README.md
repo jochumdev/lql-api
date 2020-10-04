@@ -2,7 +2,7 @@
 
 LQL API Client/Server for check_mk
 
-See [the LQL Docs](https://checkmk.com/cms_livestatus.html) for what LQL can do for you.
+Look at [the LQL Docs](https://checkmk.com/cms_livestatus.html) to see what LQL can do for you.
 
 ## Commands the client supports
 

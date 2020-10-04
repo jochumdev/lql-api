@@ -17,18 +17,25 @@ type MultiClient struct {
 	localSocket  string
 	liveproxyDir string
 	clients      map[string]Client
+	usersWatcher *UsersWatcher
 }
 
-func NewMultiClient(minConn, maxConn int, localSocket, liveproxyDir string) (Client, error) {
+func NewMultiClient(minConn, maxConn int, localSocket, liveproxyDir string, multisiteUsersFile string) (Client, error) {
+	uw, err := NewUsersWatcher(multisiteUsersFile)
+	if err != nil {
+		return nil, err
+	}
+
 	mc := &MultiClient{
 		minConn:      minConn,
 		maxConn:      maxConn,
 		localSocket:  localSocket,
 		liveproxyDir: liveproxyDir,
 		clients:      make(map[string]Client),
+		usersWatcher: uw,
 	}
 
-	err := mc.CreateClients()
+	err = mc.CreateClients()
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +79,13 @@ func (c *MultiClient) CreateClients() error {
 	return result
 }
 
+func (c *MultiClient) IsAdmin(username string) bool {
+	return c.usersWatcher.IsAdmin(username)
+}
+
 func (c *MultiClient) SetLogger(logger *log.Logger) {
+	c.usersWatcher.SetLogger(logger)
+
 	for _, client := range c.clients {
 		client.SetLogger(logger)
 	}

@@ -20,11 +20,12 @@ func init() {
 	localClientCmdLimit := 0
 	localClientCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket on the Server")
 	localClientCmd.Flags().StringP("liveproxydir", "p", "/opt/omd/sites/{site}/tmp/run/liveproxy", "Directory which contains liveproxy sockets")
+	localClientCmd.Flags().StringP("multsiteusers", "m", "/opt/omd/sites/{site}/etc/check_mk/multisite.d/wato/users.mk", "Your checkmks users.mk file")
 	localClientCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	localClientCmd.Flags().StringP("format", "f", "jsonparsed", "Format one of: python, python3, json, csv, CSV, jsonparsed (default is jsonparsed, I parse json from the server)")
 	localClientCmd.Flags().StringP("table", "t", "", "Produce a GET request for the given table (default: supply request by stdin)")
 	localClientCmd.Flags().StringArrayP("columns", "c", []string{""}, "Columns to show from the given table, this is required if you give a table!")
-	localClientCmd.Flags().StringP("user", "u", "", "LQL user to limit this on")
+	localClientCmd.Flags().StringP("user", "u", "", "CheckMK user to limit this request on")
 	localClientCmd.Flags().IntVarP(&localClientCmdLimit, "limit", "l", 0, "Limit request lines")
 	rootCmd.AddCommand(localClientCmd)
 }
@@ -52,6 +53,7 @@ Examples:
 		sReplacer := strings.NewReplacer("{site}", args[0])
 		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
 		liveproxyDir := sReplacer.Replace(cmd.Flag("liveproxydir").Value.String())
+		multisiteUsersFile := sReplacer.Replace(cmd.Flag("multsiteusers").Value.String())
 
 		var lqlClient lql.Client
 		logger := log.New()
@@ -107,7 +109,7 @@ Examples:
 			os.Exit(1)
 		}(sigc)
 
-		lqlClient, err := lql.NewMultiClient(1, 1, destSocket, liveproxyDir)
+		lqlClient, err := lql.NewMultiClient(1, 1, destSocket, liveproxyDir, multisiteUsersFile)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return

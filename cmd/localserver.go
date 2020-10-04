@@ -21,6 +21,7 @@ func init() {
 
 	localServerCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket")
 	localServerCmd.Flags().StringP("liveproxydir", "p", "/opt/omd/sites/{site}/tmp/run/liveproxy", "Directory which contains liveproxy sockets")
+	localServerCmd.Flags().StringP("multsiteusers", "u", "/opt/omd/sites/{site}/etc/check_mk/multisite.d/wato/users.mk", "Your checkmks users.mk file")
 	localServerCmd.Flags().StringP("htpasswd", "t", "/opt/omd/sites/{site}/etc/htpasswd", "htpasswd file")
 	localServerCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	localServerCmd.Flags().StringP("listen", "l", ":8080", "Address to listen on")
@@ -38,6 +39,7 @@ Requires a local lql unix socket.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])
 		liveproxyDir := sReplacer.Replace(cmd.Flag("liveproxydir").Value.String())
+		multisiteUsersFile := sReplacer.Replace(cmd.Flag("multsiteusers").Value.String())
 
 		logfile, err := cmd.Flags().GetString("logfile")
 		if err != nil {
@@ -97,7 +99,7 @@ Requires a local lql unix socket.`,
 			return
 		}
 
-		lqlClient, err = lql.NewMultiClient(minConns, maxConns, localSocket, liveproxyDir)
+		lqlClient, err = lql.NewMultiClient(minConns, maxConns, localSocket, liveproxyDir, multisiteUsersFile)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return
