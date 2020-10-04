@@ -90,7 +90,7 @@ Examples:
 
 		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
 		var tunnel *myssh.Tunnel
-		var lqlClient *lql.Client
+		var lqlClient lql.Client
 
 		logger.WithFields(log.Fields{"destSocket": destSocket, "localSocket": localSocket}).Debug("Sockets")
 
@@ -160,7 +160,7 @@ Examples:
 			return
 		}
 
-		lqlClient, err = lql.NewClient(minConns, maxConns, "unix", localSocket)
+		lqlClient, err = lql.NewSingleClient(minConns, maxConns, "unix", localSocket)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return

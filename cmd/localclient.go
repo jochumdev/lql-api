@@ -19,6 +19,7 @@ import (
 func init() {
 	localClientCmdLimit := 0
 	localClientCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket on the Server")
+	localClientCmd.Flags().StringP("liveproxydir", "p", "/opt/omd/sites/{site}/tmp/run/liveproxy", "Directory which contains liveproxy sockets")
 	localClientCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	localClientCmd.Flags().StringP("format", "f", "jsonparsed", "Format one of: python, python3, json, csv, CSV, jsonparsed (default is jsonparsed, I parse json from the server)")
 	localClientCmd.Flags().StringP("table", "t", "", "Produce a GET request for the given table (default: supply request by stdin)")
@@ -50,8 +51,9 @@ Examples:
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])
 		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
+		liveproxyDir := sReplacer.Replace(cmd.Flag("liveproxydir").Value.String())
 
-		var lqlClient *lql.Client
+		var lqlClient lql.Client
 		logger := log.New()
 		logger.SetOutput(os.Stderr)
 		if !cmd.Flag("debug").Changed {
@@ -105,7 +107,7 @@ Examples:
 			os.Exit(1)
 		}(sigc)
 
-		lqlClient, err := lql.NewClient(1, 1, "unix", destSocket)
+		lqlClient, err := lql.NewMultiClient(1, 1, destSocket, liveproxyDir)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return

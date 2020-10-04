@@ -18,7 +18,7 @@ type Server struct {
 	htpasswdPath string
 }
 
-func NewServer(client *Client, logger *log.Logger, htpasswdPath string) (*Server, error) {
+func NewServer(client Client, logger *log.Logger, htpasswdPath string) (*Server, error) {
 	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
 	engine.Use(cors.Default())

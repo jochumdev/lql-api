@@ -1,3 +1,9 @@
+lql-api (0.0.10) UNRELEASED; urgency=medium
+
+  * Add openapi/github.json for demo purposes
+
+ -- René Jochum <rene@webmeisterei.com>  Sun, 04 Oct 2020 08:41:05 +0200
+
 lql-api (0.0.9) UNRELEASED; urgency=medium
 
   * Remove debug from the README install

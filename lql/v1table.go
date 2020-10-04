@@ -110,6 +110,9 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 
 	resp, err := client.Request(c, strings.Join(lines, "\n"), user, limit)
 	if err != nil {
+		Logger.Error(err)
+	}
+	if resp == nil {
 		return nil, err
 	}
 
@@ -130,6 +133,9 @@ func v1TableGetColumns(c *gin.Context, params *v1TableGetColumnsParams) ([]strin
 	msg := fmt.Sprintf("GET columns\nColumns: name\nFilter: table = %s", params.Table)
 	resp, err := client.Request(c, msg, user, 0)
 	if err != nil {
+		Logger.Error(err)
+	}
+	if resp == nil {
 		return nil, err
 	}
 

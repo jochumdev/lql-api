@@ -18,40 +18,47 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func connCreator(network string, address string) func() (net.Conn, error) {
+func singleClientConnCreator(network string, address string) func() (net.Conn, error) {
 	return func() (net.Conn, error) {
 		return net.Dial(network, address)
 	}
 }
 
-type Client struct {
+type SingleClient struct {
+	address   string
 	pool      *gncp.GncpPool
 	logger    *log.Logger
 	timeLimit int
 }
 
-func NewClient(minConn, maxConn int, network, address string) (*Client, error) {
-	pool, err := gncp.NewPool(minConn, maxConn, connCreator(network, address))
+func NewSingleClient(minConn, maxConn int, network, address string) (Client, error) {
+	pool, err := gncp.NewPool(minConn, maxConn, singleClientConnCreator(network, address))
 	if err != nil {
 		return nil, err
 	}
 
-	return &Client{
+	return &SingleClient{
+		address:   address,
 		pool:      pool,
 		logger:    log.New(),
 		timeLimit: 60,
 	}, nil
 }
 
-func (c *Client) SetLogger(logger *log.Logger) {
+func (c *SingleClient) ClientCount() int {
+	return 1
+}
+
+func (c *SingleClient) SetLogger(logger *log.Logger) {
 	c.logger = logger
 }
 
-func (c *Client) Close() error {
+func (c *SingleClient) Close() error {
+	c.logger.WithFields(log.Fields{"address": c.address}).Debug("Closing pool")
 	return c.pool.Close()
 }
 
-func (c *Client) modifyRaw(request, outputFormat, authUser string, limit int) (string, error) {
+func (c *SingleClient) modifyRaw(request, outputFormat, authUser string, limit int) (string, error) {
 	request = strings.Replace(request, "\n\n", "\n", -1)
 	request = strings.Trim(request, "\n")
 
@@ -131,18 +138,18 @@ func (c *Client) modifyRaw(request, outputFormat, authUser string, limit int) (s
 	return strings.Join(lines, "\n") + "\n\n", nil
 }
 
-func (c *Client) Request(context context.Context, request, authUser string, limit int) ([]gin.H, error) {
+func (c *SingleClient) Request(context context.Context, request, authUser string, limit int) ([]gin.H, error) {
 	rawResponse, err := c.RequestRaw(context, request, "json", authUser, limit)
 	if err != nil {
 		return nil, err
 	}
 
-	parsedJson := make([]interface{}, bytes.Count(rawResponse, []byte{'\n'}))
-	json.Unmarshal(rawResponse, &parsedJson)
+	parsedJSON := make([]interface{}, bytes.Count(rawResponse, []byte{'\n'}))
+	json.Unmarshal(rawResponse, &parsedJSON)
 
 	headers := []string{}
 	result := []gin.H{}
-	for i, data := range parsedJson {
+	for i, data := range parsedJSON {
 		if i == 0 {
 			for _, header := range data.([]interface{}) {
 				headers = append(headers, header.(string))
@@ -161,7 +168,7 @@ func (c *Client) Request(context context.Context, request, authUser string, limi
 	return result, err
 }
 
-func (c *Client) RequestRaw(context context.Context, request, outputFormat, authUser string, limit int) ([]byte, error) {
+func (c *SingleClient) RequestRaw(context context.Context, request, outputFormat, authUser string, limit int) ([]byte, error) {
 	request, err := c.modifyRaw(request, outputFormat, authUser, limit)
 	if err != nil {
 		return nil, err
@@ -172,10 +179,10 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 		return nil, err
 	}
 
-	c.logger.WithField("request", request).Debug("Writing request")
+	c.logger.WithFields(log.Fields{"request": request, "address": c.address}).Debug("Writing request")
 	_, err = conn.Write([]byte(request))
 	if err != nil && !errors.Is(err, syscall.EPIPE) {
-		c.logger.WithField("error", err).Debug("Removing failed connection")
+		c.logger.WithFields(log.Fields{"address": c.address, "error": err}).Debug("Removing failed connection")
 		c.pool.Remove(conn)
 		return nil, err
 	} else if errors.Is(err, syscall.EPIPE) {
@@ -185,7 +192,7 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 		numTries := 0
 		maxTries := c.pool.GetMaxConns() * 2
 		for errors.Is(err, syscall.EPIPE) {
-			c.logger.WithFields(log.Fields{"error": err, "num_tries": numTries, "max_tries": maxTries, "max_conns": c.pool.GetMaxConns()}).Debug("Trying to reconnect")
+			c.logger.WithFields(log.Fields{"address": c.address, "error": err, "num_tries": numTries, "max_tries": maxTries, "max_conns": c.pool.GetMaxConns()}).Debug("Trying to reconnect")
 
 			conn, err = c.pool.GetWithContext(context)
 			if err != nil {
@@ -196,7 +203,7 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 			_, err = conn.Write([]byte(request))
 			if err != nil && !errors.Is(err, syscall.EPIPE) {
 				// Other error than EPIPE, bailout
-				c.logger.WithField("error", err).Debug("Removing failed connection")
+				c.logger.WithFields(log.Fields{"address": c.address, "error": err}).Debug("Removing failed connection")
 				c.pool.Remove(conn)
 				return nil, err
 			} else if err == nil {
@@ -208,7 +215,7 @@ func (c *Client) RequestRaw(context context.Context, request, outputFormat, auth
 
 			numTries++
 			if numTries >= maxTries {
-				c.logger.WithField("error", err).Error("To much retries can't reconnect")
+				c.logger.WithFields(log.Fields{"address": c.address, "error": err}).Error("To much retries can't reconnect")
 				// Bailout to much tries
 				return nil, err
 			}

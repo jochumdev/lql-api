@@ -140,9 +140,11 @@ func (p *GncpPool) Close() error {
 	if p.isClosed() == true {
 		return errPoolIsClose
 	}
+
 	p.lock.Lock()
-	defer p.lock.Unlock()
 	p.closed = true
+	p.lock.Unlock()
+
 	close(p.conns)
 	for conn := range p.conns {
 		conn.Close()
@@ -172,9 +174,8 @@ func (p *GncpPool) Put(conn net.Conn) error {
 
 func (p *GncpPool) isClosed() bool {
 	p.lock.Lock()
-	ret := p.closed
-	p.lock.Unlock()
-	return ret
+	defer p.lock.Unlock()
+	return p.closed
 }
 
 // Remove let connection not belong connection pool. And it will close connection.

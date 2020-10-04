@@ -63,7 +63,7 @@ Examples:
 		destSocket := sReplacer.Replace(cmd.Flag("socket").Value.String())
 		localSocket := sReplacer.Replace(path.Join(os.TempDir(), "lql-{site}-client.sock"))
 		var tunnel *myssh.Tunnel
-		var lqlClient *lql.Client
+		var lqlClient lql.Client
 		logger := log.New()
 		logger.SetOutput(os.Stderr)
 		if !cmd.Flag("debug").Changed {
@@ -157,7 +157,7 @@ Examples:
 		defer tunnel.Close()
 		time.Sleep(500 * time.Millisecond)
 
-		lqlClient, err := lql.NewClient(1, 1, "unix", localSocket)
+		lqlClient, err := lql.NewSingleClient(1, 1, "unix", localSocket)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return

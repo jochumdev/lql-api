@@ -19,16 +19,16 @@ var (
 const CtxKeyLQLClient = "lqlClient"
 
 // GinGetLqlClient gets the LQL Client from a gin context
-func GinGetLqlClient(c *gin.Context) (*Client, error) {
+func GinGetLqlClient(c *gin.Context) (Client, error) {
 	clientIface, ok := c.Get(CtxKeyLQLClient)
 	if !ok {
 		return nil, errors.New("Failed to get the LQL client from context")
 	}
 
-	return clientIface.(*Client), nil
+	return clientIface.(Client), nil
 }
 
-func clientInjectorMiddleware(client *Client) gin.HandlerFunc {
+func clientInjectorMiddleware(client Client) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set(CtxKeyLQLClient, client)
 	}

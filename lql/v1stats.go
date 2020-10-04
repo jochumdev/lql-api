@@ -73,7 +73,7 @@ Stats: service_scheduled_downtime_depth = 0
 StatsAnd: 3`
 
 	rsp, err = client.Request(c, msg, user, 0)
-	if err != nil {
+	if rsp == nil {
 		return nil, err
 	}
 

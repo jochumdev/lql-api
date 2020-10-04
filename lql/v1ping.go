@@ -11,9 +11,9 @@ func v1Ping(c *gin.Context) (gin.H, error) {
 
 	msg := `GET hosts
 Columns: name`
-	_, err = client.Request(c, msg, user, 1)
+	_, err = client.Request(c, msg, user, client.ClientCount())
 	if err != nil {
-		return nil, err
+		Logger.Error(err)
 	}
 
 	return gin.H{"message": "pong"}, nil

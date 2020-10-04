@@ -20,6 +20,7 @@ func init() {
 	localServerCmd.Flags().IntVarP(&localServerMaxConns, "max-conns", "x", 5, "maximal Client Connections")
 
 	localServerCmd.Flags().StringP("socket", "s", "/opt/omd/sites/{site}/tmp/run/live", "Socket")
+	localServerCmd.Flags().StringP("liveproxydir", "p", "/opt/omd/sites/{site}/tmp/run/liveproxy", "Directory which contains liveproxy sockets")
 	localServerCmd.Flags().StringP("htpasswd", "t", "/opt/omd/sites/{site}/etc/htpasswd", "htpasswd file")
 	localServerCmd.Flags().BoolP("debug", "d", false, "Enable Debug on stderr")
 	localServerCmd.Flags().StringP("listen", "l", ":8080", "Address to listen on")
@@ -36,6 +37,7 @@ Requires a local lql unix socket.`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sReplacer := strings.NewReplacer("{site}", args[0])
+		liveproxyDir := sReplacer.Replace(cmd.Flag("liveproxydir").Value.String())
 
 		logfile, err := cmd.Flags().GetString("logfile")
 		if err != nil {
@@ -65,7 +67,7 @@ Requires a local lql unix socket.`,
 			return
 		}
 		localSocket := sReplacer.Replace(socket)
-		var lqlClient *lql.Client
+		var lqlClient lql.Client
 
 		logger.WithFields(log.Fields{"localSocket": localSocket}).Debug("Sockets")
 
@@ -77,9 +79,9 @@ Requires a local lql unix socket.`,
 			logger.WithFields(log.Fields{"signal": sig}).Info("Caught signal shutting down.")
 
 			// Stop listening (and unlink the socket if unix type):
-			if lqlClient != nil {
-				lqlClient.Close()
-			}
+			// if lqlClient != nil {
+			// 	lqlClient.Close()
+			// }
 
 			os.Exit(1)
 		}(sigc)
@@ -95,7 +97,7 @@ Requires a local lql unix socket.`,
 			return
 		}
 
-		lqlClient, err = lql.NewClient(minConns, maxConns, "unix", localSocket)
+		lqlClient, err = lql.NewMultiClient(minConns, maxConns, localSocket, liveproxyDir)
 		if err != nil {
 			logger.WithField("error", err).Error()
 			return
