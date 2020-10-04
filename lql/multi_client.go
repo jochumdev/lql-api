@@ -56,7 +56,8 @@ func (c *MultiClient) CreateClients() error {
 
 	files, err := ioutil.ReadDir(c.liveproxyDir)
 	if err != nil {
-		return err
+		// Ignore listing errors and use the local client only
+		return nil
 	}
 
 	var result error
