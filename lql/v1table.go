@@ -117,7 +117,7 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 				filters = append(filters, addFilters...)
 				continue
 			}
-			if filter[0:7] != "Filter:" {
+			if filter[0:7] != "Filter:" || filter[0:7] != "NEGATE:" || filter[0:3] != "OR:" || filter[0:4] != "AND:" {
 				return nil, fmt.Errorf("Invalid Filter '%s' given", filter)
 			}
 
