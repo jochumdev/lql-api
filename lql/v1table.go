@@ -30,6 +30,7 @@ func init() {
 		"display_name",
 		"description",
 		"plugin_output",
+		"comments",
 	}
 
 	v1TableFilters = make(map[string][]string, 6)
@@ -38,6 +39,7 @@ func init() {
 		"Filter: scheduled_downtime_depth = 0",
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: host_state = 0",
+		"And: 4",
 	}
 	v1TableFilters["services_unhandled"] = []string{
 		"Filter: state > 0",
@@ -45,25 +47,30 @@ func init() {
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: acknowledged = 0",
 		"Filter: host_state = 0",
+		"And: 5",
 	}
 	v1TableFilters["services_stale"] = []string{
 		"Filter: service_staleness >= 1.5",
 		"Filter: host_scheduled_downtime_depth = 0",
 		"Filter: service_scheduled_downtime_depth = 0",
+		"And: 3",
 	}
 	v1TableFilters["hosts_problems"] = []string{
 		"Filter: state >= 0",
 		"Filter: state > 0",
 		"Filter: scheduled_downtime_depth = 0",
+		"And: 3",
 	}
 	v1TableFilters["hosts_unhandled"] = []string{
 		"Filter: state > 0",
 		"Filter: scheduled_downtime_depth = 0",
 		"Filter: acknowledged = 0",
+		"And: 3",
 	}
 	v1TableFilters["hosts_stale"] = []string{
 		"Filter: host_staleness >= 1.5",
 		"Filter: host_scheduled_downtime_depth = 0",
+		"And: 2",
 	}
 }
 
@@ -117,7 +124,11 @@ func v1TableGet(c *gin.Context, params *v1TableGetParams) ([]gin.H, error) {
 				filters = append(filters, addFilters...)
 				continue
 			}
-			if filter[0:7] != "Filter:" || filter[0:7] != "NEGATE:" || filter[0:3] != "OR:" || filter[0:4] != "AND:" {
+			if !strings.HasPrefix(filter, "Filter:") &&
+				!strings.HasPrefix(filter, "Negate:") &&
+				!strings.HasPrefix(filter, "Or:") &&
+				!strings.HasPrefix(filter, "And:") {
+
 				return nil, fmt.Errorf("Invalid Filter '%s' given", filter)
 			}
 

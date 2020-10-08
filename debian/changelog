@@ -1,8 +1,8 @@
-lql-api (0.0.12-alpha) UNRELEASED; urgency=medium
+lql-api (0.0.12-beta) UNRELEASED; urgency=medium
 
   * Add hosts_* filter, change service_* filter
 
- -- René Jochum <rene@webmeisterei.com>  Mon, 05 Oct 2020 02:22:54 +0200
+ -- René Jochum <rene@webmeisterei.com>  Thu, 08 Oct 2020 02:34:22 +0200
 
 lql-api (0.0.11-alpha) UNRELEASED; urgency=medium
 
