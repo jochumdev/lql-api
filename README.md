@@ -1,6 +1,6 @@
 # lql-api
 
-LQL API Client/Server for check_mk
+LQL API Client/Server for check_mk, something like a Database API for Check_MK.
 
 Look at [the LQL Docs](https://checkmk.com/cms_livestatus.html) to see what LQL can do for you.
 
