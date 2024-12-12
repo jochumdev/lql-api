@@ -1,3 +1,458 @@
+- semver: 0.0.14
+  date: 2024-12-12T09:36:18.644850299+01:00
+  packager: ""
+  changes:
+    - commit: 19868730962389bd86a989a58b7f963478028b03
+      note: 'fix: goreleaser service'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
+    - commit: 24c43b26822a9a19bc438f9534a9bc7e931be5ec
+      note: 'feat: add goreleaser'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
+    - commit: 04ac3f3f3e0e6038d35eb412dd051a6a33febe3f
+      note: 'fix: update deps, auth'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
+    - commit: ee6bd8aa5dc39fb9a1347d4101f4a1ef6494116c
+      note: Update README.md
+      author:
+        name: Rene Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: GitHub
+        email: noreply@github.com
+    - commit: 011695bb61c2f02c6dc29eaf36908d597a48164a
+      note: Update changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: bdb73f7a66e6fe4a02141ff1c8c984edb436d582
+      note: Support and/or/negate filters
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 7f29798b421144ff507794b92d438fd156ee6459
+      note: Allow more filter specific keys in v1/table/* queries
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 00585e2a22f74a4c12abd8ad5d58ff2eb645c3e0
+      note: Smaller changes to the buildsystem
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: b14d4acef856fc3cc105e039178ea9d73ec4927f
+      note: Add hosts_* filter, change service_* filter
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 9bfeec03a8ba9732a04ef51a56627f778553ada9
+      note: Back to development
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 3619f9b1cbfddd5956d2495e34bbe8b77bfcf14e
+      note: Ignore non-existant liveproxy folder
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: ea8039fb8fe31f0c33beff615e3674c676f7a5bc
+      note: Changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: d62c1382cacff2432a546bcf1b5f6a3a7f55114e
+      note: |-
+        Detect if a user is Admin and do not send AuthUser
+
+        This is done by parsing users.mk with python, the users.mk will be watched by inotify for changes.
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: f1300b5c5fd043c4739e08ccab3bab6561ecc8d2
+      note: Update CHANGELOG
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 30ddbe51a7ed03803b450e70782d4af83cb59913
+      note: Implement Multisite support (multiple sockets)
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: dc9d508a9078ccc1442276e3cce4c7c56bc12899
+      note: Add openapi/github.json for demo purposes
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 9f84a0e60ef04433b25de80f302f62a4bbc54826
+      note: Replace go-http-auth with own version
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: b8d7289e6899848b757a8c8af11b41104be35785
+      note: Add state field by default to the services table
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: e9bf5fddd1e19313dea91b9335dd30ff274e5e73
+      note: Fix connection problems, smaller changes
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 4cab8447a9f8901e42e3fda2f5b4023ac16487f3
+      note: Finaly fix reconnections
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 995c397252f35d3f31cbbefb7e4b8a34f42fef20
+      note: Remove debug from the README install
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: cecaa295070c4c7351309419a6a487e80e52a317
+      note: Watch the htpasswd for changed and reload
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: a7cf80947dce93c91e103a5d7e6fc73811652612
+      note: Update docs
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 2d4eefe5b582e055cdd591b403760af43e94a7bf
+      note: Add help outputs to the README
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 0cb63b008d13d3411542baebdf39b768fe84a57e
+      note: Properly reconnect in lql.Client
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 594c1585f8cada38564e51600bcc622f2150e83a
+      note: Document localserver installing
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: d45ffa7d22e9723369002f6852b3ba3ab9aaac7b
+      note: update debian/changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: c2df0f6cf0dec794e9697119b000f6d9cfa8e86c
+      note: Improve example.sh
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 2641b48c6a596870c09d0ad88320a6e293d591f7
+      note: Try reconnect on EPIPE maybe fixes conn problems
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 201a979a487d20e7b3f4a99c7fb687342f09ee8b
+      note: Add filtering
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: e7b5a4fe919b92c89c75c99c82bc811461318be7
+      note: Rename socket -> lql-{site}-client.socket
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 281bb15128c5aad739551d4ae38a2f7ce594fec1
+      note: Update changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: d0a1a5abdd9cd8aa7e5d0d49bc59456b1463b620
+      note: Update changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 65ac8927fa35969dcd0b08fc0d756502cfecb774
+      note: Use GncpPool.Put, maybe fixes connection problems
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 0d3149417ea0e3a2e27d20f6fbd41b6366e18084
+      note: Update debian/changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: b920c88a6ba098715f44f340ca17626d976759dd
+      note: Rename host -> hosts in stats/tactical_overview
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: ec8e10a17c67cdd58c3db7170a0fcdc5c4ca7b98
+      note: Add 0.0.4 to debian changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: c41dfcc69317bc29204d114f17d738fb527c4b85
+      note: Add /v1/table/:name and /v1/table/:name/columns
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: e91f38bc7b049ed5ba7633d99446b38db0c5bb13
+      note: Update readme, add 0.0.3 to debian/changelog
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 49b6af41db387036af29d9a68176ad954fb28c15
+      note: Implement v1/ping
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 2ba4ce2a61b6ebac9e16d0ce99fa0255a52756e4
+      note: Enable versioning
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 9bb7c8dfeef4970d4b3cd02df9377ad0a8b8b868
+      note: Rename lql_api -> lql-api
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: c1f10978c8cad973ce4bc0994cf34e00aec79933
+      note: Add license to debian/copyright
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: b415e62c6995e1cece8b77301a851388f1e50cf2
+      note: Debian packaging updates
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 904fbd948f9c3414d88ab42f4fa588667242502a
+      note: Add debian build
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 086f1c8daf187d4a3c5ac7e48bc9e69cecc90fcf
+      note: Ignore quilt dir .pc via .gitignore
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 1901a92dcc4deb5a0f8c809520c5f85e3fde8463
+      note: New upstream version 0.0~git20200929.ca3764e
+      author:
+        name: René Jochum
+        email: rene@webmeisterei.com
+      committer:
+        name: René Jochum
+        email: rene@webmeisterei.com
+    - commit: 511cdb5f0030e6e4cdd49345ea138ac69ff5ede6
+      note: Add v1/stats/tactical_overview
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: 2d65aa7ec7f0f44495b1c72c46b6452cfdf25cbb
+      note: Add localserver, systemd service file
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: 9dd64d1da54b332e0fb36227685545a9c69d9467
+      note: Update docs
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: 002f5fb0f866a371a751d2be4b506bafed673782
+      note: Update docs
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: b252e1abe96b24adcc6d98cacaeea2764006612e
+      note: Update docs
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: b325055e527c0a30fa96857941b0d38700524670
+      note: Update docs
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: ab9830a9cbd9205f428a97bc17da4554ea07ffb2
+      note: Add basic v1/raw target
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: be1f26e90b989e8720ec4caea21c55420c1d30e8
+      note: Initial commit
+      author:
+        name: René Jochum
+        email: rene@jochum.dev
+      committer:
+        name: René Jochum
+        email: rene@jochum.dev
+    - commit: 40c227c089cd53a5423ffd725e64b8a42622da70
+      note: Initial commit
+      author:
+        name: Rene Jochum
+        email: rene@jochums.at
+      committer:
+        name: GitHub
+        email: noreply@github.com
 - semver: 0.0.13
   date: 2024-12-12T09:18:02+01:00
   packager: René Jochum <jochumdev@gmail.com>
