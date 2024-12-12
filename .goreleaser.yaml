@@ -49,8 +49,14 @@ nfpms:
 
     maintainer: René Jochum <jochumdev@gmail.com>
 
+    changelog: ./changelog.yml
+
     license: MIT
 
     formats:
       - deb
+      - rpm
 
+    contents:
+      - src: ./service/lql-api@.service
+        dst: /lib/systemd/system/lql-api@.service
