@@ -15,11 +15,11 @@ Build-Depends: debhelper-compat (= 12),
                golang-golang-x-crypto-dev,
                golang-logrus-dev
 Standards-Version: 4.5.0
-Vcs-Browser: https://github.com/webmeisterei/lql-api
-Vcs-Git: https://github.com/webmeisterei/lql-api.git
-Homepage: https://github.com/webmeisterei/lql-api
+Vcs-Browser: https://github.com/jochumdev/lql-api
+Vcs-Git: https://github.com/jochumdev/lql-api.git
+Homepage: https://github.com/jochumdev/lql-api
 Rules-Requires-Root: no
-XS-Go-Import-Path: github.com/webmeisterei/lql-api
+XS-Go-Import-Path: github.com/jochumdev/lql-api
 
 Package: lql-api
 Architecture: any

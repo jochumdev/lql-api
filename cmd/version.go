@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/jochumdev/lql-api/version"
 	"github.com/spf13/cobra"
-	"github.com/webmeisterei/lql-api/version"
 )
 
 func init() {

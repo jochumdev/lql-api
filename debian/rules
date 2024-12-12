@@ -20,7 +20,7 @@ endif
 	dh $@ --builddirectory=_build --buildsystem=golang --with=golang
 
 override_dh_auto_build:
-	dh_auto_build -- -ldflags '-w -s -X github.com/webmeisterei/lql-api/version.Version=${VERSION}'
+	dh_auto_build -- -ldflags '-w -s -X github.com/jochumdev/lql-api/version.Version=${VERSION}'
 
 override_dh_auto_install:
 	dh_auto_install -- --no-source

@@ -192,8 +192,17 @@ Next create an apache proxy for it in /etc/apache2/conf-available/zzzz_`site`_lq
     ProxyPassReverse http://127.0.0.1:8080/
   </Location>
 </IfModule>
+
+<IfModule !mod_proxy_http.c>
+  Alias /<site>/lql-api/ /omd/sites/<site>
+  <Directory /omd/sites/<site>/lql-api/
+    Deny from all
+    ErrorDocument 403 "<h1>Checkmk: Incomplete Apache Installation</h1>You need mod_proxy and
+    mod_proxy_http in order to run the web interface of Checkmk."
+  </Directory>
+</IfModule>
 ```
 
 ## License
 
-MIT - Copyright 2020 by Webmeisterei GmbH
+MIT - Copyright 2024 by [@jochumdev](http://github.com/jochumdev)

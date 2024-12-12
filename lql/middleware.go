@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	auth "github.com/abbot/go-http-auth"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
-	auth "github.com/webmeisterei/go-http-auth"
 )
 
 var (

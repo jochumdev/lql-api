@@ -19,8 +19,8 @@ ifneq ($(shell git status --porcelain),)
 endif
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS=-ldflags '-w -s -X github.com/webmeisterei/lql-api/version.Version=${VERSION}'
-LDFLAGS_STATIC=-ldflags '-extldflags "-static" -w -s -X github.com/webmeisterei/lql-api/version.Version=${VERSION}'
+LDFLAGS=-ldflags '-w -s -X github.com/jochumdev/lql-api/version.Version=${VERSION}'
+LDFLAGS_STATIC=-ldflags '-extldflags "-static" -w -s -X github.com/jochumdev/lql-api/version.Version=${VERSION}'
 
 build:
 	go build -o ${BINARY} -a ${LDFLAGS}

@@ -10,8 +10,8 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/jochumdev/lql-api/lql"
 	"github.com/spf13/cobra"
-	"github.com/webmeisterei/lql-api/lql"
 
 	log "github.com/sirupsen/logrus"
 )

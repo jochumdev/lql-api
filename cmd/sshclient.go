@@ -13,9 +13,9 @@ import (
 	"syscall"
 	"time"
 
+	myssh "github.com/jochumdev/lql-api/internal/ssh"
+	"github.com/jochumdev/lql-api/lql"
 	"github.com/spf13/cobra"
-	myssh "github.com/webmeisterei/lql-api/internal/ssh"
-	"github.com/webmeisterei/lql-api/lql"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 

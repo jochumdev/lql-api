@@ -1,3 +1,10 @@
+lql-api (0.0.13) RELEASED; urgency=medium
+
+  * Update dependencies
+  * Fix auth
+
+ -- René Jochum <jochumdev@gmail.com>  Thu, 12 Dec 2024 09:04:27 +0200
+
 lql-api (0.0.12-beta) RELEASED; urgency=medium
 
   * Add hosts_* filter, change service_* filter
@@ -5,28 +12,28 @@ lql-api (0.0.12-beta) RELEASED; urgency=medium
   * Allow more filter specific keys in v1/table/* queries
   * Support and/or/negate filters
 
- -- René Jochum <rene@webmeisterei.com>  Thu, 08 Oct 2020 02:35:27 +0200
+ -- René Jochum <jochumdev@gmail.com>  Thu, 08 Oct 2020 02:35:27 +0200
 
 lql-api (0.0.11-alpha) UNRELEASED; urgency=medium
 
   * Detect if a user is Admin and do not send AuthUser
 
- -- René Jochum <rene@webmeisterei.com>  Sun, 04 Oct 2020 23:53:41 +0200
+ -- René Jochum <jochumdev@gmail.com>  Sun, 04 Oct 2020 23:53:41 +0200
 
 lql-api (0.0.10-alpha) RELEASED; urgency=medium
 
   * Implement Multisite support (multiple sockets)
   * Add openapi/github.json for demo purposes
 
- -- René Jochum <rene@webmeisterei.com>  Sun, 04 Oct 2020 21:39:06 +0200
+ -- René Jochum <jochumdev@gmail.com>  Sun, 04 Oct 2020 21:39:06 +0200
 
 lql-api (0.0.9) RELEASED; urgency=medium
 
   * Remove debug from the README install
-  * Finaly fix reconnections
+  * Finally fix reconnections
   * Add state field by default to the services table
 
- -- René Jochum <rene@webmeisterei.com>  Thu, 01 Oct 2020 18:48:05 +0200
+ -- René Jochum <jochumdev@gmail.com>  Thu, 01 Oct 2020 18:48:05 +0200
 
 lql-api (0.0.7) UNRELEASED; urgency=low
 
@@ -39,34 +46,34 @@ lql-api (0.0.7) UNRELEASED; urgency=low
   * Add help outputs to the README
   * Update docs
 
- -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 16:15:17 +0200
+ -- René Jochum <jochumdev@gmail.com>  Wed, 30 Sep 2020 16:15:17 +0200
 
 lql-api (0.0.6) UNRELEASED; urgency=low
 
   * Use GncpPool.Put, maybe fixes connection problems
 
- -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
+ -- René Jochum <jochumdev@gmail.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.5) UNRELEASED; urgency=low
 
   * Rename host -> hosts in stats/tactical_overview
 
- -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
+ -- René Jochum <jochumdev@gmail.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.4) UNRELEASED; urgency=low
 
   * Add /v1/table/:name and /v1/table/:name/columns
 
- -- Webmeisterei Support <support@webmeisterei.com>  Wed, 30 Sep 2020 05:24:30 +0200
+ -- René Jochum <jochumdev@gmail.com>  Wed, 30 Sep 2020 05:24:30 +0200
 
 lql-api (0.0.3) UNRELEASED; urgency=low
 
   * Add ping API
 
- -- Webmeisterei Support <support@webmeisterei.com>  Tue, 30 Sep 2020 01:31:46 +0200
+ -- René Jochum <jochumdev@gmail.com>  Tue, 30 Sep 2020 01:31:46 +0200
 
 lql-api (0.0~git20200929.ca3764e-1) UNRELEASED; urgency=low
 
   * Initial release
 
- -- Webmeisterei Support <support@webmeisterei.com>  Tue, 29 Sep 2020 23:34:46 +0200
+ -- René Jochum <jochumdev@gmail.com>  Tue, 29 Sep 2020 23:34:46 +0200

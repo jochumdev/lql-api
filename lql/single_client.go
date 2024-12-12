@@ -12,8 +12,8 @@ import (
 	"syscall"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webmeisterei/lql-api/internal/gncp"
-	"github.com/webmeisterei/lql-api/internal/utils"
+	"github.com/jochumdev/lql-api/internal/gncp"
+	"github.com/jochumdev/lql-api/internal/utils"
 
 	log "github.com/sirupsen/logrus"
 )
