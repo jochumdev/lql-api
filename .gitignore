@@ -7,3 +7,5 @@ debian/debhelper-build-stamp
 debian/lql-api.substvars
 debian/lql-api.debhelper.log
 debian/.debhelper
+
+dist/
