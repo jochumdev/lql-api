@@ -1,8 +1,10 @@
 # lql-api
 
-LQL API Client/Server for check_mk, something like a Database API for Check_MK.
+LQL-API is an HTTP/S and SSH bridge to the Livestatus socket, it uses the same authentication as check_mk by parsing the site’s Apache Httpasswd.
 
 Look at [the LQL Docs](https://checkmk.com/cms_livestatus.html) to see what LQL can do for you.
+
+LQL-API is typically installed as https://monitor.fdqn.com/“site”/lql-api/
 
 ## Commands the client supports
 
