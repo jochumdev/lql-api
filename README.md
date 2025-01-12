@@ -177,7 +177,7 @@ ARGS=""
 Now you can start the lql-api
 
 ```bash
-systemctl start lql-api@<site>
+systemctl enable --now lql-api@<site>
 ```
 
 Next create an apache proxy for it in /etc/apache2/conf-available/zzzz_`site`_lql-api.conf
