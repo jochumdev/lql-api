@@ -26,6 +26,10 @@ Examples:
 
     $ echo -e "GET hosts\nColumns: name address groups\nLimit: 1" | lql-api localclient mysite
 
+- Fetch the events from the last 5 mins:
+
+    $ echo -e "GET log\nColumns: current_host_name current_service_display_name state plugin_output time\nFilter: time >= $(($(date +%s) - 600))\nFilter: state > 0" | lql-api localclient mysite | jq
+
 Usage:
   lql-api localclient [site] [flags]
 
