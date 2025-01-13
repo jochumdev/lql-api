@@ -28,7 +28,7 @@ Examples:
 
 - Fetch the events from the last 5 mins:
 
-    $ echo -e "GET log\nColumns: current_host_name current_service_display_name state plugin_output time\nFilter: time >= $(($(date +%s) - 600))\nFilter: state > 0" | lql-api localclient mysite | jq
+    $ echo -e "GET log\nColumns: current_host_name current_service_display_name state plugin_output time\nFilter: time >= $(($(date +%s) - 300))\nFilter: state > 0" | lql-api localclient mysite | jq
 
 Usage:
   lql-api localclient [site] [flags]
