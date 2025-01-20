@@ -32,7 +32,11 @@ cleanInstall() {
 
 upgrade() {
     printf "\033[32m Post Install of an upgrade\033[0m\n"
-    # Step 3(upgrade), do what you need
+
+    if [ "${use_systemctl}" = "True" ]; then
+        printf "\033[32m Reload the service unit from disk\033[0m\n"
+        systemctl daemon-reload ||:
+    fi
 }
 
 # Step 2, check if this is a clean install or an upgrade
