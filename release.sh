@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+set -x
 
 git commit -a -S -m "$1"
 chglog add --version $2
