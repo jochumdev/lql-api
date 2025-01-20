@@ -57,6 +57,9 @@ nfpms:
       - deb
       - rpm
 
+    scripts:
+      postinstall: ./service/postinstall.sh
+
     contents:
       - src: ./service/lql-api@.service
-        dst: /lib/systemd/system/lql-api@.service
+        dst: /etc/systemd/system/lql-api@.service
