@@ -1,1 +1,300 @@
-debian/changelog
+
+0.0.18
+=============
+2025-01-20
+
+* fix: systemd service (9c43fc45)
+
+0.0.17
+=============
+2025-01-20
+
+* v0.0.16 (d18b74f8)
+* fix: systemd service (376d515b)
+* v0.0.15 (3d10b49c)
+* fix: README, it's 5 mins. (b6dfc8da)
+* feat: README add more advanced example. (ec078c8f)
+* fix: README enable the service instead of start. (509f8b54)
+* Update README.md (0c72e637)
+* changelog (a5efcc7a)
+* fix: goreleaser service (19868730)
+* feat: add goreleaser (24c43b26)
+* fix: update deps, auth (04ac3f3f)
+* Update README.md (ee6bd8aa)
+* Update changelog (011695bb)
+* Support and/or/negate filters (bdb73f7a)
+* Allow more filter specific keys in v1/table/* queries (7f29798b)
+* Smaller changes to the buildsystem (00585e2a)
+* Add hosts_* filter, change service_* filter (b14d4ace)
+* Back to development (9bfeec03)
+* Ignore non-existant liveproxy folder (3619f9b1)
+* Changelog (ea8039fb)
+* Detect if a user is Admin and do not send AuthUser (d62c1382)
+* Update CHANGELOG (f1300b5c)
+* Implement Multisite support (multiple sockets) (30ddbe51)
+* Add openapi/github.json for demo purposes (dc9d508a)
+* Replace go-http-auth with own version (9f84a0e6)
+* Add state field by default to the services table (b8d7289e)
+* Fix connection problems, smaller changes (e9bf5fdd)
+* Finaly fix reconnections (4cab8447)
+* Remove debug from the README install (995c3972)
+* Watch the htpasswd for changed and reload (cecaa295)
+* Update docs (a7cf8094)
+* Add help outputs to the README (2d4eefe5)
+* Properly reconnect in lql.Client (0cb63b00)
+* Document localserver installing (594c1585)
+* update debian/changelog (d45ffa7d)
+* Improve example.sh (c2df0f6c)
+* Try reconnect on EPIPE maybe fixes conn problems (2641b48c)
+* Add filtering (201a979a)
+* Rename socket -> lql-{site}-client.socket (e7b5a4fe)
+* Update changelog (281bb151)
+* Update changelog (d0a1a5ab)
+* Use GncpPool.Put, maybe fixes connection problems (65ac8927)
+* Update debian/changelog (0d314941)
+* Rename host -> hosts in stats/tactical_overview (b920c88a)
+* Add 0.0.4 to debian changelog (ec8e10a1)
+* Add /v1/table/:name and /v1/table/:name/columns (c41dfcc6)
+* Update readme, add 0.0.3 to debian/changelog (e91f38bc)
+* Implement v1/ping (49b6af41)
+* Enable versioning (2ba4ce2a)
+* Rename lql_api -> lql-api (9bb7c8df)
+* Add license to debian/copyright (c1f10978)
+* Debian packaging updates (b415e62c)
+* Add debian build (904fbd94)
+* Ignore quilt dir .pc via .gitignore (086f1c8d)
+* New upstream version 0.0~git20200929.ca3764e (1901a92d)
+* Add v1/stats/tactical_overview (511cdb5f)
+* Add localserver, systemd service file (2d65aa7e)
+* Update docs (9dd64d1d)
+* Update docs (002f5fb0)
+* Update docs (b252e1ab)
+* Update docs (b325055e)
+* Add basic v1/raw target (ab9830a9)
+* Initial commit (be1f26e9)
+* Initial commit (40c227c0)
+
+0.0.16
+=============
+2025-01-20
+
+* fix: systemd service (7da9a4ab)
+
+0.0.15
+=============
+2025-01-20
+
+* changelog (a5efcc7a)
+* fix: goreleaser service (19868730)
+* feat: add goreleaser (24c43b26)
+* fix: update deps, auth (04ac3f3f)
+* Update README.md (ee6bd8aa)
+* Update changelog (011695bb)
+* Support and/or/negate filters (bdb73f7a)
+* Allow more filter specific keys in v1/table/* queries (7f29798b)
+* Smaller changes to the buildsystem (00585e2a)
+* Add hosts_* filter, change service_* filter (b14d4ace)
+* Back to development (9bfeec03)
+* Ignore non-existant liveproxy folder (3619f9b1)
+* Changelog (ea8039fb)
+* Detect if a user is Admin and do not send AuthUser (d62c1382)
+* Update CHANGELOG (f1300b5c)
+* Implement Multisite support (multiple sockets) (30ddbe51)
+* Add openapi/github.json for demo purposes (dc9d508a)
+* Replace go-http-auth with own version (9f84a0e6)
+* Add state field by default to the services table (b8d7289e)
+* Fix connection problems, smaller changes (e9bf5fdd)
+* Finaly fix reconnections (4cab8447)
+* Remove debug from the README install (995c3972)
+* Watch the htpasswd for changed and reload (cecaa295)
+* Update docs (a7cf8094)
+* Add help outputs to the README (2d4eefe5)
+* Properly reconnect in lql.Client (0cb63b00)
+* Document localserver installing (594c1585)
+* update debian/changelog (d45ffa7d)
+* Improve example.sh (c2df0f6c)
+* Try reconnect on EPIPE maybe fixes conn problems (2641b48c)
+* Add filtering (201a979a)
+* Rename socket -> lql-{site}-client.socket (e7b5a4fe)
+* Update changelog (281bb151)
+* Update changelog (d0a1a5ab)
+* Use GncpPool.Put, maybe fixes connection problems (65ac8927)
+* Update debian/changelog (0d314941)
+* Rename host -> hosts in stats/tactical_overview (b920c88a)
+* Add 0.0.4 to debian changelog (ec8e10a1)
+* Add /v1/table/:name and /v1/table/:name/columns (c41dfcc6)
+* Update readme, add 0.0.3 to debian/changelog (e91f38bc)
+* Implement v1/ping (49b6af41)
+* Enable versioning (2ba4ce2a)
+* Rename lql_api -> lql-api (9bb7c8df)
+* Add license to debian/copyright (c1f10978)
+* Debian packaging updates (b415e62c)
+* Add debian build (904fbd94)
+* Ignore quilt dir .pc via .gitignore (086f1c8d)
+* New upstream version 0.0~git20200929.ca3764e (1901a92d)
+* Add v1/stats/tactical_overview (511cdb5f)
+* Add localserver, systemd service file (2d65aa7e)
+* Update docs (9dd64d1d)
+* Update docs (002f5fb0)
+* Update docs (b252e1ab)
+* Update docs (b325055e)
+* Add basic v1/raw target (ab9830a9)
+* Initial commit (be1f26e9)
+* Initial commit (40c227c0)
+
+0.0.14
+=============
+2024-12-12
+
+* fix: goreleaser service (19868730)
+* feat: add goreleaser (24c43b26)
+* fix: update deps, auth (04ac3f3f)
+* Update README.md (ee6bd8aa)
+* Update changelog (011695bb)
+* Support and/or/negate filters (bdb73f7a)
+* Allow more filter specific keys in v1/table/* queries (7f29798b)
+* Smaller changes to the buildsystem (00585e2a)
+* Add hosts_* filter, change service_* filter (b14d4ace)
+* Back to development (9bfeec03)
+* Ignore non-existant liveproxy folder (3619f9b1)
+* Changelog (ea8039fb)
+* Detect if a user is Admin and do not send AuthUser (d62c1382)
+* Update CHANGELOG (f1300b5c)
+* Implement Multisite support (multiple sockets) (30ddbe51)
+* Add openapi/github.json for demo purposes (dc9d508a)
+* Replace go-http-auth with own version (9f84a0e6)
+* Add state field by default to the services table (b8d7289e)
+* Fix connection problems, smaller changes (e9bf5fdd)
+* Finaly fix reconnections (4cab8447)
+* Remove debug from the README install (995c3972)
+* Watch the htpasswd for changed and reload (cecaa295)
+* Update docs (a7cf8094)
+* Add help outputs to the README (2d4eefe5)
+* Properly reconnect in lql.Client (0cb63b00)
+* Document localserver installing (594c1585)
+* update debian/changelog (d45ffa7d)
+* Improve example.sh (c2df0f6c)
+* Try reconnect on EPIPE maybe fixes conn problems (2641b48c)
+* Add filtering (201a979a)
+* Rename socket -> lql-{site}-client.socket (e7b5a4fe)
+* Update changelog (281bb151)
+* Update changelog (d0a1a5ab)
+* Use GncpPool.Put, maybe fixes connection problems (65ac8927)
+* Update debian/changelog (0d314941)
+* Rename host -> hosts in stats/tactical_overview (b920c88a)
+* Add 0.0.4 to debian changelog (ec8e10a1)
+* Add /v1/table/:name and /v1/table/:name/columns (c41dfcc6)
+* Update readme, add 0.0.3 to debian/changelog (e91f38bc)
+* Implement v1/ping (49b6af41)
+* Enable versioning (2ba4ce2a)
+* Rename lql_api -> lql-api (9bb7c8df)
+* Add license to debian/copyright (c1f10978)
+* Debian packaging updates (b415e62c)
+* Add debian build (904fbd94)
+* Ignore quilt dir .pc via .gitignore (086f1c8d)
+* New upstream version 0.0~git20200929.ca3764e (1901a92d)
+* Add v1/stats/tactical_overview (511cdb5f)
+* Add localserver, systemd service file (2d65aa7e)
+* Update docs (9dd64d1d)
+* Update docs (002f5fb0)
+* Update docs (b252e1ab)
+* Update docs (b325055e)
+* Add basic v1/raw target (ab9830a9)
+* Initial commit (be1f26e9)
+* Initial commit (40c227c0)
+
+0.0.13
+=============
+2024-12-12
+
+* feat: add goreleaser (24c43b26)
+* fix: update deps, auth (04ac3f3f)
+* Update README.md (ee6bd8aa)
+* Update changelog (011695bb)
+* Support and/or/negate filters (bdb73f7a)
+* Allow more filter specific keys in v1/table/* queries (7f29798b)
+* Smaller changes to the buildsystem (00585e2a)
+* Add hosts_* filter, change service_* filter (b14d4ace)
+* Back to development (9bfeec03)
+* Ignore non-existant liveproxy folder (3619f9b1)
+* Changelog (ea8039fb)
+* Detect if a user is Admin and do not send AuthUser (d62c1382)
+* Update CHANGELOG (f1300b5c)
+* Implement Multisite support (multiple sockets) (30ddbe51)
+* Add openapi/github.json for demo purposes (dc9d508a)
+
+0.0.9
+=============
+2020-10-01
+
+* Replace go-http-auth with own version (9f84a0e6)
+* Add state field by default to the services table (b8d7289e)
+* Fix connection problems, smaller changes (e9bf5fdd)
+* Finaly fix reconnections (4cab8447)
+* Remove debug from the README install (995c3972)
+* Watch the htpasswd for changed and reload (cecaa295)
+* Update docs (a7cf8094)
+* Add help outputs to the README (2d4eefe5)
+* Properly reconnect in lql.Client (0cb63b00)
+* Document localserver installing (594c1585)
+* update debian/changelog (d45ffa7d)
+
+0.0.7
+=============
+2020-09-30
+
+* Improve example.sh (c2df0f6c)
+* Try reconnect on EPIPE maybe fixes conn problems (2641b48c)
+* Add filtering (201a979a)
+* Rename socket -> lql-{site}-client.socket (e7b5a4fe)
+
+0.0.6
+=============
+2020-09-30
+
+* Update changelog (281bb151)
+* Update changelog (d0a1a5ab)
+* Use GncpPool.Put, maybe fixes connection problems (65ac8927)
+
+0.0.5
+=============
+2020-09-30
+
+* Update debian/changelog (0d314941)
+* Rename host -> hosts in stats/tactical_overview (b920c88a)
+
+0.0.4
+=============
+2020-09-30
+
+* Add 0.0.4 to debian changelog (ec8e10a1)
+* Add /v1/table/:name and /v1/table/:name/columns (c41dfcc6)
+* Update readme, add 0.0.3 to debian/changelog (e91f38bc)
+
+0.0.3
+=============
+2020-09-29
+
+* Implement v1/ping (49b6af41)
+
+0.0.1
+=============
+2020-09-29
+
+* Enable versioning (2ba4ce2a)
+* Rename lql_api -> lql-api (9bb7c8df)
+* Add license to debian/copyright (c1f10978)
+* Debian packaging updates (b415e62c)
+* Add debian build (904fbd94)
+* Ignore quilt dir .pc via .gitignore (086f1c8d)
+* New upstream version 0.0~git20200929.ca3764e (1901a92d)
+* Add v1/stats/tactical_overview (511cdb5f)
+* Add localserver, systemd service file (2d65aa7e)
+* Update docs (9dd64d1d)
+* Update docs (002f5fb0)
+* Update docs (b252e1ab)
+* Update docs (b325055e)
+* Add basic v1/raw target (ab9830a9)
+* Initial commit (be1f26e9)
+* Initial commit (40c227c0)
+
