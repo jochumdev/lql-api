@@ -1,3 +1,23 @@
+- semver: 0.0.20
+  date: 2025-01-20T14:20:26.065076052+01:00
+  packager: ""
+  changes:
+    - commit: a6bfb425b9aa6cb63d25f57102372a4918289406
+      note: 'fix: postinstall script'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
+    - commit: fba3764b3de78857770ce7c1731c246077089eb4
+      note: 'fix: improve release script'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
 - semver: 0.0.19
   date: 2025-01-20T14:16:32.903870704+01:00
   packager: ""
