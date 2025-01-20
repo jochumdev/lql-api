@@ -33,7 +33,6 @@ cleanInstall() {
 upgrade() {
     printf "\033[32m Post Install of an upgrade\033[0m\n"
     # Step 3(upgrade), do what you need
-    ...
 }
 
 # Step 2, check if this is a clean install or an upgrade
