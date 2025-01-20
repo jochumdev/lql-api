@@ -1,3 +1,15 @@
+- semver: 0.0.19
+  date: 2025-01-20T14:16:32.903870704+01:00
+  packager: ""
+  changes:
+    - commit: 608fba17fa70e24342a58c6fe6908062e5ef8ae2
+      note: 'feat: add changelog to the repo'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
 - semver: 0.0.18
   date: 2025-01-20T14:11:20.586093444+01:00
   packager: ""
