@@ -208,10 +208,7 @@ Next create an apache proxy for it in /etc/apache2/conf-available/zzzz_`site`_lq
 Install [chglog](https://github.com/goreleaser/chglog)
 
 ```bash
-git commit -S -m "fix: ..."
-chglog add --version v0.0.xx
-git commit -S -m "v0.0.xx"
-git tag v0.0.xx
+./release.sh "fix: ..." v0.0.16
 ```
 
 ## License
