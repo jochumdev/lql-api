@@ -1,3 +1,15 @@
+- semver: 0.0.18
+  date: 2025-01-20T14:11:20.586093444+01:00
+  packager: ""
+  changes:
+    - commit: 9c43fc45a3df9f44d7da0a566b9de54921877269
+      note: 'fix: systemd service'
+      author:
+        name: René Jochum
+        email: jochumdev@gmail.com
+      committer:
+        name: René Jochum
+        email: jochumdev@gmail.com
 - semver: 0.0.17
   date: 2025-01-20T14:11:08.570818742+01:00
   packager: ""
