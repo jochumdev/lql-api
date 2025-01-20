@@ -1,6 +1,7 @@
 [Unit]
 Description=LQL API Server
-After=network.target
+Requires=omd.service
+After=omd.service
 
 [Service]
 EnvironmentFile=/etc/lql-api/%i
