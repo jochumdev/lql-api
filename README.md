@@ -12,6 +12,12 @@ You can test with the following URL:
 https://monitor.fqdn.com/"site"/lql-api/v1/table/hosts
 ```
 
+To get the column's of the host table:
+
+```
+https://monitor.fqdn.com/"site"/lql-api/v1/table/columns?filter=Filter%3A+table+=+hosts&column=name&column=description
+```
+
 ## Commands the client supports
 
 ### localclient - Local LQL Client
