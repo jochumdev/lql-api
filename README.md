@@ -6,6 +6,12 @@ Look at [the LQL Docs](https://checkmk.com/cms_livestatus.html) to see what LQL 
 
 LQL-API is typically installed as https://monitor.fdqn.com/“site”/lql-api/
 
+You can test with the following URL:
+
+```
+https://monitor.fqdn.com/"site"/lql-api/v1/table/hosts
+```
+
 ## Commands the client supports
 
 ### localclient - Local LQL Client
